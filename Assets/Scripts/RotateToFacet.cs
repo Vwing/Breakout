@@ -17,19 +17,19 @@ public class RotateToFacet : MonoBehaviour
     public Transform Down;
     private int paddleBoxLayer;
     private Transform cameraTransform;
-    private CardboardHead cardboardHead;
+    //private CardboardHead cardboardHead;
     private bool android = false;
 
     void Start ()
     {
         paddleBoxLayer = 1 << LayerMask.NameToLayer("PaddleBox");
-        cameraTransform = GetComponent<ChooseRiftOrCardboard>().TheChosenCamera.transform;
+        cameraTransform = Camera.main.transform; //GetComponent<ChooseRiftOrCardboard>().TheChosenCamera.transform;
 #if UNITY_EDITOR
-        cardboardHead = null;
+        //cardboardHead = null;
 #elif UNITY_STANDALONE
         cardboardHead = null;
 #elif UNITY_ANDROID
-        cardboardHead = cameraTransform.parent.gameObject.GetComponent<CardboardHead>();
+        //cardboardHead = cameraTransform.parent.gameObject.GetComponent<CardboardHead>();
         android = true;
 #endif
     }
@@ -43,11 +43,11 @@ public class RotateToFacet : MonoBehaviour
             Physics.Raycast(transform.position, fwd * 10, out hit, paddleBoxLayer);
             if (!android)
                 RotateToDirection(hit.transform.gameObject.name);
-            else
-            {
-                cardboardHead.target = ReturnDirectionTransform(hit.transform.gameObject.name);
-                Cardboard.SDK.Recenter();
-            }
+            //else
+            //{
+            //    cardboardHead.target = ReturnDirectionTransform(hit.transform.gameObject.name);
+            //    Cardboard.SDK.Recenter();
+            //}
         }
 	}
 

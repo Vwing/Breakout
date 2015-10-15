@@ -6,23 +6,34 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
-    public static int lives = 2;
-    public static int bricks = 20;
+    public int MaxLives = 3;
+    public int MaxBricks = 20;
+    public static int lives = 1;
+    public static int bricks = 1;
     public static GameManager instance = null;
     public GameObject YouWinText;
     public GameObject YouLoseText;
     public GameObject Paddle;
     public GameObject Ball;
     public GameObject Explosion;
+    private bool gameOver = false;
 
 	void Awake () 
 	{
+        lives = MaxLives;
+        bricks = MaxBricks;
         if (instance == null)
             instance = this;
         else if (instance != null)
             Destroy(gameObject);
         Setup();
 	}
+
+    //void OnLevelWasLoaded(int level)
+    //{
+    //    lives = MaxLives;
+    //    bricks = MaxBricks;
+    //}
 
     void Setup()
     {
@@ -32,11 +43,10 @@ public class GameManager : MonoBehaviour
 
 	void Update ()
 	{
-        if (Paddle == null)
+        if (gameOver)
         {
             if (Input.GetButtonDown("Fire1") || Cardboard.SDK.Triggered)
             {
-                lives = 2;
                 Destroy(this);
             }
             return;
@@ -60,6 +70,7 @@ public class GameManager : MonoBehaviour
         Instantiate(Explosion, Ball.transform.position, Ball.transform.rotation);
         Destroy(Paddle);
         Destroy(Ball);
+        gameOver = true;
     }
 
     void CheckIfWon()
@@ -67,5 +78,6 @@ public class GameManager : MonoBehaviour
         if (bricks > 0)
             return;
         YouWinText.SetActive(true);
+        gameOver = true;
     }
 }

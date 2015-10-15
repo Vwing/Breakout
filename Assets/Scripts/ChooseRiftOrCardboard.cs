@@ -11,19 +11,28 @@ using System.Collections;
 public class ChooseRiftOrCardboard : MonoBehaviour {
     public GameObject RiftCamera;
     public GameObject CardboardCamera;
-    public GameObject TheChosenCamera;
-	// Use this for initialization
+    //public GameObject TheChosenCamera;
+
 	void Awake () 
     {
 #if UNITY_EDITOR
         RiftCamera.SetActive(true);
-        TheChosenCamera = RiftCamera;
+        CardboardCamera.SetActive(false);
+        if(UnityEngine.VR.VRSettings.enabled)
+            RiftCamera.GetComponent<SmoothedMouseLook>().enabled = false;
+        else
+            RiftCamera.GetComponent<SmoothedMouseLook>().enabled = true;
+        //TheChosenCamera = RiftCamera;
 #elif UNITY_STANDALONE
         RiftCamera.SetActive(true);
-        TheChosenCamera = RiftCamera;
+        CardboardCamera.SetActive(false);
+        if(UnityEngine.VR.VRSettings.enabled)
+            RiftCamera.GetComponent<SmoothedMouseLook>().enabled = false;
+        else
+            RiftCamera.GetComponent<SmoothedMouseLook>().enabled = true;
 #elif UNITY_ANDROID
+        RiftCamera.SetActive(false);
         CardboardCamera.SetActive(true);
-        TheChosenCamera = CardboardCamera;
 #endif
     }
 }

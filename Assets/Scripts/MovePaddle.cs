@@ -14,7 +14,7 @@ public class MovePaddle : MonoBehaviour
 	{
 
         paddleBoxLayer = 1 << LayerMask.NameToLayer("PaddleBox");
-        cameraTransform = GetComponent<ChooseRiftOrCardboard>().TheChosenCamera.transform;
+        cameraTransform = Camera.main.transform;
 	}
 
     RaycastHit[] hits;

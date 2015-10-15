@@ -32,7 +32,6 @@ public class Ball : MonoBehaviour
         if (other.gameObject.tag == "PaddleBox")
         {
             GameManager.lives -= 1;
-            Debug.Log(GameManager.lives);
         }
     }
 }
