@@ -3,7 +3,12 @@ using System.Collections;
 
 public class HitBall : MonoBehaviour
 {
-    public float angleMagnitude = 10f;
+    //Directly changes the velocity of the ball so that it goes at an angle relative to the
+    //center of the paddle
+    
+    //the lower the angleMagnitude, the greater the angle the ball will go at
+    //(sorry it's unintuitive)
+    public float angleMagnitude = 0.25f;
 
     void OnCollisionEnter(Collision other)
     {
