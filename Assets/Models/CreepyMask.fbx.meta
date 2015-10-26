@@ -1,0 +1,123 @@
+fileFormatVersion: 2
+guid: e5da4df6f5cf5a640a3c7141a86a2927
+timeCreated: 1445719653
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: CreepyMask_root
+    100004: IMG_20151024_122155_jpg
+    100006: IMG_20151024_122203_jpg
+    100008: IMG_20151024_122211_jpg
+    100010: IMG_20151024_122220_jpg
+    100012: IMG_20151024_122230_jpg
+    100014: IMG_20151024_122243_jpg
+    100016: IMG_20151024_122253_jpg
+    100018: IMG_20151024_122314_jpg
+    100020: IMG_20151024_122321_jpg
+    100022: IMG_20151024_122328_jpg
+    100024: IMG_20151024_122348_jpg
+    100026: IMG_20151024_122401_jpg
+    100028: IMG_20151024_122412_jpg
+    100030: IMG_20151024_122420_jpg
+    100032: IMG_20151024_122505_jpg
+    100034: IMG_20151024_122511_jpg
+    100036: IMG_20151024_122519_jpg
+    100038: IMG_20151024_122534_jpg
+    100040: IMG_20151024_122540_jpg
+    100042: Texture_0
+    100044: Untextured
+    400000: //RootNode
+    400002: CreepyMask_root
+    400004: IMG_20151024_122155_jpg
+    400006: IMG_20151024_122203_jpg
+    400008: IMG_20151024_122211_jpg
+    400010: IMG_20151024_122220_jpg
+    400012: IMG_20151024_122230_jpg
+    400014: IMG_20151024_122243_jpg
+    400016: IMG_20151024_122253_jpg
+    400018: IMG_20151024_122314_jpg
+    400020: IMG_20151024_122321_jpg
+    400022: IMG_20151024_122328_jpg
+    400024: IMG_20151024_122348_jpg
+    400026: IMG_20151024_122401_jpg
+    400028: IMG_20151024_122412_jpg
+    400030: IMG_20151024_122420_jpg
+    400032: IMG_20151024_122505_jpg
+    400034: IMG_20151024_122511_jpg
+    400036: IMG_20151024_122519_jpg
+    400038: IMG_20151024_122534_jpg
+    400040: IMG_20151024_122540_jpg
+    400042: Texture_0
+    400044: Untextured
+    2300000: Texture_0
+    2300002: Untextured
+    3300000: Texture_0
+    3300002: Untextured
+    4300000: Texture_0
+    4300002: Untextured
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -9,11 +9,9 @@ public class MovePaddle : MonoBehaviour
 {
     public GameObject paddle;
     private Transform cameraTransform;
-    private int paddleBoxLayer;
+
 	void Start () 
 	{
-
-        paddleBoxLayer = 1 << LayerMask.NameToLayer("PaddleBox");
         cameraTransform = Camera.main.transform;
 	}
 
@@ -21,16 +19,22 @@ public class MovePaddle : MonoBehaviour
     Vector3 fwd;
 	void Update ()
 	{
-        if (paddle == null)
+        //if no paddle present, don't attempt to move the paddle
+        if (!paddle)
         {
             paddle = GameObject.Find("Paddle");
-            if (paddle == null)
+            if (!paddle)
                 return;
         }
+        MovePaddleWithView();
+	}
+
+    void MovePaddleWithView()
+    {
         fwd = cameraTransform.TransformDirection(Vector3.forward);
         hits = Physics.RaycastAll(transform.position, fwd * 15);
-        RaycastHit box;
-        box = hits[0];
+        RaycastHit box = hits[0];
+
         foreach (RaycastHit hit in hits)
             if (hit.transform.tag == "PaddleBoxTag")
             {
@@ -39,5 +43,5 @@ public class MovePaddle : MonoBehaviour
             }
         paddle.transform.position = box.point;
         paddle.transform.rotation = box.transform.rotation;
-	}
+    }
 }

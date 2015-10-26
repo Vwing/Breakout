@@ -11,27 +11,41 @@ public class Ball : MonoBehaviour
     Rigidbody rb;
     public float StartForce = 600f;
     bool ballInPlay = false;
+    Transform paddle;
+    bool triggered;
+
 	void Awake () 
 	{
         rb = GetComponent<Rigidbody>();
+        paddle = transform.parent;
 	}
 
 	void Update ()
 	{
-		if(!ballInPlay && (Input.GetButtonDown("Fire1") || Cardboard.SDK.Triggered))
-        {
-            ballInPlay = true;
-            transform.parent = null;
-            rb.isKinematic = false;
-            rb.AddRelativeForce(0, 0, StartForce);
-        }
+        triggered = Input.GetButton("Fire1") || Cardboard.SDK.Triggered;
+        bool released = Input.GetButtonUp("Fire1") || !Cardboard.SDK.Triggered;
+        if (!ballInPlay && (triggered || released))
+            LaunchBall();
 	}
 
-    void OnTriggerEnter(Collider other)
+    void LaunchBall()
     {
-        if (other.gameObject.tag == "PaddleBox")
-        {
-            GameManager.lives -= 1;
-        }
+        ballInPlay = true;
+        transform.parent = null;
+        rb.isKinematic = false;
+        rb.AddRelativeForce(0, 0, StartForce);
+    }
+
+    void StickBall()
+    {
+        ballInPlay = false;
+        transform.parent = paddle;
+        rb.isKinematic = true;
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.transform.tag == "Paddle" && triggered)
+            StickBall();
     }
 }

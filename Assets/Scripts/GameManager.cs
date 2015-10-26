@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public int MaxLives = 3;
     public int MaxBricks = 20;
+    public int haveBricks;
     public static int lives = 1;
     public static int bricks = 1;
     public static GameManager instance = null;
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
 
 	void Update ()
 	{
+        haveBricks = bricks;
         if (gameOver)
         {
             if (Input.GetButtonDown("Fire1") || Cardboard.SDK.Triggered)
@@ -64,7 +66,7 @@ public class GameManager : MonoBehaviour
     {
         if (lives > 0)
             return;
-        Debug.Log("GameOver");
+
         YouLoseText.SetActive(true);
         Instantiate(Explosion, Paddle.transform.position, Paddle.transform.rotation);
         Instantiate(Explosion, Ball.transform.position, Ball.transform.rotation);
