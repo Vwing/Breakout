@@ -13,20 +13,22 @@ public class Ball : MonoBehaviour
     bool ballInPlay = false;
     Transform paddle;
     bool triggered;
+    AudioSource audio;
 
-	void Awake () 
-	{
+    void Awake()
+    {
         rb = GetComponent<Rigidbody>();
         paddle = transform.parent;
-	}
+        audio = GetComponent<AudioSource>(); //Get audio clip
+    }
 
-	void Update ()
-	{
+    void Update()
+    {
         triggered = Input.GetButton("Fire1") || Cardboard.SDK.Triggered;
         bool released = Input.GetButtonUp("Fire1") || !Cardboard.SDK.Triggered;
         if (!ballInPlay && (triggered || released))
             LaunchBall();
-	}
+    }
 
     void LaunchBall()
     {
@@ -45,6 +47,14 @@ public class Ball : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+        if (other.transform.tag == "Paddle" || other.transform.tag == "Wall") //On collision with paddle or wall...
+        {
+            //Play collision sound
+            audio.Play();
+            audio.Play(44100);
+        }
+
+
         if (other.transform.tag == "Paddle" && triggered)
             StickBall();
     }
