@@ -32,7 +32,7 @@ using UnityEngine;
 /// not place the object as a child of the CardboardHead, or the user will not be
 /// able to look at different parts of the UI because it will move with them.  It is
 /// better to place it as a sibling of the Head object.
-public class CardboardOnGUI : MonoBehaviour {
+public class CardboardOnGUI : UnityEngine.MonoBehaviour {
 
   /// The .NET type of an `OnGUI()` method.
   public delegate void OnGUICallback();
@@ -47,7 +47,7 @@ public class CardboardOnGUI : MonoBehaviour {
   /// very top, add "if (!CardboardOnGUI.OKToDraw(this)) return;".
   /// This will ensure only one OnGUI() call sequence occurs per frame,
   /// whether in VR Mode or not.
-  public static bool OKToDraw(MonoBehaviour mb) {
+  public static bool OKToDraw(UnityEngine.MonoBehaviour mb) {
     return okToDraw && (mb == null || mb.enabled && mb.gameObject.activeInHierarchy);
   }
   private static bool okToDraw;

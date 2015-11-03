@@ -38,7 +38,7 @@ using UnityEngine;
 /// just fit inside the far clipping plane, and kept centered on the camera's
 /// position.
 [RequireComponent(typeof(Camera))]
-public class SkyboxMesh : MonoBehaviour {
+public class SkyboxMesh : UnityEngine.MonoBehaviour {
 #if UNITY_5
   void Awake() {
     Debug.Log("SkyboxMesh is not needed in Unity 5");

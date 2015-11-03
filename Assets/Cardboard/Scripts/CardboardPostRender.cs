@@ -15,7 +15,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
-public class CardboardPostRender : MonoBehaviour {
+public class CardboardPostRender : UnityEngine.MonoBehaviour {
 
 #if UNITY_5
   new public Camera camera { get; private set; }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TurnBallTowardsPlayer : MonoBehaviour
+public class TurnBallTowardsPlayer : UnityEngine.MonoBehaviour
 {
     //How much the ball should turn (in radians) towards player position (Origin point of world)
     //when bouncing against sphere bounds

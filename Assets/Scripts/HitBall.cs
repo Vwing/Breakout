@@ -9,7 +9,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class HitBall : MonoBehaviour
+public class HitBall : UnityEngine.MonoBehaviour
 {
     public float midAngleMagnitude = 0.5f;
     public float edgeAngleMagnitude = 0.15f;

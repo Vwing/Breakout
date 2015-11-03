@@ -5,7 +5,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class MovePaddle : MonoBehaviour
+public class MovePaddle : UnityEngine.MonoBehaviour
 {
     public GameObject paddle;
     private Transform cameraTransform;

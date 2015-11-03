@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Brick : MonoBehaviour
+public class Brick : UnityEngine.MonoBehaviour
 {
     public GameObject SpawnUponDestruction;
 

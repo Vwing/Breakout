@@ -28,7 +28,7 @@ using System.Collections.Generic;
 /// There should only be one of these in a scene.  An instance will be generated automatically
 /// by this script at runtime, or you can add one via the Editor if you wish to customize
 /// its starting properties.
-public class Cardboard : MonoBehaviour {
+public class Cardboard : UnityEngine.MonoBehaviour {
   /// The singleton instance of the Cardboard class.
   /// Not null: the instance is created automatically on demand if not already present.
   public static Cardboard SDK {

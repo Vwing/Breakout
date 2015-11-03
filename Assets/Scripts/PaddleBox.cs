@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PaddleBox : MonoBehaviour
+public class PaddleBox : UnityEngine.MonoBehaviour
 {
     public Material PaddleBoxHit;
     public Material paddleBoxReg;

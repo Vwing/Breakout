@@ -6,7 +6,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class RotateToFacet : MonoBehaviour
+public class RotateToFacet : UnityEngine.MonoBehaviour
 {
     public float timeToSlerp = 0.5f;
     public Transform North;

@@ -28,7 +28,7 @@ using UnityEngine;
 /// StereoController, be sure to call StereoController::InvalidateEyes on it
 /// in order to reset its cache.
 [RequireComponent(typeof(Camera))]
-public class CardboardEye : MonoBehaviour {
+public class CardboardEye : UnityEngine.MonoBehaviour {
   /// Whether this is the left eye or the right eye.
   /// Determines which stereo eye to render, that is, which `EyeOffset` and
   /// `Projection` matrix to use and which half of the screen to render to.

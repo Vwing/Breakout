@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DestroyAfterXSeconds : MonoBehaviour
+public class DestroyAfterXSeconds : UnityEngine.MonoBehaviour
 {
     public float HowLongInSeconds = 3;
     float elapsedTime = 0f;
+
 
 	void Update ()
 	{
