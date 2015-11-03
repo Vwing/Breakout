@@ -8,7 +8,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class ChooseRiftOrCardboard : MonoBehaviour {
+public class ChooseRiftOrCardboard : UnityEngine.MonoBehaviour {
     public GameObject RiftCamera;
     public GameObject CardboardCamera;
     //public GameObject TheChosenCamera;

@@ -25,7 +25,7 @@ using System.Collections;
 /// scene in the Editor, and as the fall back when the native code distortion
 /// is not available or disabled.
 [RequireComponent(typeof(Camera))]
-public class RadialUndistortionEffect : MonoBehaviour {
+public class RadialUndistortionEffect : UnityEngine.MonoBehaviour {
 
   private Material material;
 

@@ -52,7 +52,7 @@ using System.Linq;
 /// available via _Component -> Cardboard -> Update Stereo Cameras_ in the Editor’s
 /// main menu, and in the context menu for the `Camera` component.
 [RequireComponent(typeof(Camera))]
-public class StereoController : MonoBehaviour {
+public class StereoController : UnityEngine.MonoBehaviour {
   /// Whether to draw directly to the output window (true), or to an offscreen buffer
   /// first and then blit (false). If you wish to use Deferred Rendering or any
   /// Image Effects in stereo, turn this option off.

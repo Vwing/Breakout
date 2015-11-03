@@ -28,7 +28,7 @@ using System.Collections;
 /// thus recreating the directional behavior, but with proper stereo parallax.  The
 /// flare is repositioned relative to each camera that renders it.
 [RequireComponent(typeof(LensFlare))]
-public class StereoLensFlare : MonoBehaviour {
+public class StereoLensFlare : UnityEngine.MonoBehaviour {
 #if UNITY_5
   void Awake() {
     Debug.Log("StereoLensFlare is not needed in Unity 5.");

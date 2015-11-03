@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [AddComponentMenu("Camera-Control/Smooth Mouse Look")]
-public class SmoothedMouseLook : MonoBehaviour
+public class SmoothedMouseLook : UnityEngine.MonoBehaviour
 {
 
     public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }

@@ -32,7 +32,7 @@ using UnityEngine;
 /// different targets (one of which may be the parent), in order to split where
 /// the rotation is applied from where the positional offset is applied.  Use the
 /// #trackRotation and #trackPosition properties in this case.
-public class CardboardHead : MonoBehaviour {
+public class CardboardHead : UnityEngine.MonoBehaviour {
   /// Determines whether to apply the user's head rotation to this gameobject's
   /// orientation.  True means to update the gameobject's orientation with the
   /// user's head rotation, and false means don't modify the gameobject's orientation.

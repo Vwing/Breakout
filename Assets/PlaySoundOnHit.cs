@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlaySoundOnHit : MonoBehaviour
+public class PlaySoundOnHit : UnityEngine.MonoBehaviour
 {
     public List<AudioClip> sounds;
     private AudioSource audio;

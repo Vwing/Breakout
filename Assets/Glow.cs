@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Glow : MonoBehaviour
+public class Glow : UnityEngine.MonoBehaviour
 {
     public float GlowRate = 1f;
     float MaxIntensity;

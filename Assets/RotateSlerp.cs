@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RotateSlerp : MonoBehaviour
+public class RotateSlerp : UnityEngine.MonoBehaviour
 {
     Quaternion begin;
     Quaternion end;

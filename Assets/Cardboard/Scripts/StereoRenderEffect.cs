@@ -15,7 +15,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
-public class StereoRenderEffect : MonoBehaviour {
+public class StereoRenderEffect : UnityEngine.MonoBehaviour {
   private Material material;
 
 #if UNITY_5

@@ -6,7 +6,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Ball : MonoBehaviour
+public class Ball : UnityEngine.MonoBehaviour
 {
     Rigidbody rb;
     public float StartForce = 600f;
@@ -51,7 +51,6 @@ public class Ball : MonoBehaviour
         {
             //Play collision sound
             audio.Play();
-            audio.Play(44100);
         }
 
 

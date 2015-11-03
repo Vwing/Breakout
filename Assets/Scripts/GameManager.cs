@@ -4,7 +4,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class GameManager : MonoBehaviour
+public class GameManager : UnityEngine.MonoBehaviour
 {
     public int MaxLives = 3;
     public int MaxBricks = 20;
@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public GameObject Ball;
     public GameObject Explosion;
     private bool gameOver = false;
+
 
 	void Awake () 
 	{

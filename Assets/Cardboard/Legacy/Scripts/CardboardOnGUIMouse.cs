@@ -21,7 +21,7 @@ using System.Collections;
 /// Attach this script to the same object as CardboardOnGUI itself.  It
 /// supports moving the mouse with the user's gaze, and clicking on the UI with the
 /// trigger, but other mouse-controlling devices, such as gamepads, will work as well.
-public class CardboardOnGUIMouse : MonoBehaviour {
+public class CardboardOnGUIMouse : UnityEngine.MonoBehaviour {
 
   /// The image to draw into the captured GUI texture representing the current
   /// pointer position.

@@ -45,7 +45,7 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
 [RequireComponent(typeof(Collider))]
-public class CardboardOnGUIWindow : MonoBehaviour {
+public class CardboardOnGUIWindow : UnityEngine.MonoBehaviour {
   private MeshRenderer meshRenderer;
 
   /// Determines the portion of the CardboardOnGUI texture to draw on the attached
