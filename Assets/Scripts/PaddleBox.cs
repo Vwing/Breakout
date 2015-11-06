@@ -27,7 +27,7 @@ public class PaddleBox : UnityEngine.MonoBehaviour
     IEnumerator Damaged(Collider ball)
     {
         GameManager.lives -= 1;
-        
+
 
         float t = 0f;
         while(t < 0.3f)
