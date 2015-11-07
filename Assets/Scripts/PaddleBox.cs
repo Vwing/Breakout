@@ -5,11 +5,6 @@ public class PaddleBox : UnityEngine.MonoBehaviour
 {
     public Material PaddleBoxHit;
     public Material paddleBoxReg;
-	public GameObject south;
-	public GameObject east;
-	public GameObject west;
-	public GameObject up;
-	public GameObject down;
 
 	void Start () 
 	{
@@ -41,13 +36,13 @@ public class PaddleBox : UnityEngine.MonoBehaviour
 		float starttime = Time.time;
 		Renderer r = GetComponent<Renderer> ();
 
-		setAllMaterials(PaddleBoxHit);
+		setMaterial(PaddleBoxHit);
 
 		while (Time.time < starttime + 0.1f) {
 			yield return null;
 		}
 		
-		setAllMaterials(paddleBoxReg);
+		setMaterial(paddleBoxReg);
 		starttime = Time.time;
 		
 
@@ -55,13 +50,13 @@ public class PaddleBox : UnityEngine.MonoBehaviour
 			yield return null;
 		}
 
-		setAllMaterials(PaddleBoxHit);
+		setMaterial(PaddleBoxHit);
 
 		while (Time.time < starttime + 0.1f) {
 			yield return null;
 		}
 		
-		setAllMaterials(paddleBoxReg);
+		setMaterial(paddleBoxReg);
 		starttime = Time.time;
 		
 
@@ -69,7 +64,7 @@ public class PaddleBox : UnityEngine.MonoBehaviour
 			yield return null;
 		}
 		
-		setAllMaterials(PaddleBoxHit);
+		setMaterial(PaddleBoxHit);
 		starttime = Time.time;
 		
 		while (Time.time < starttime + 0.2f) {
@@ -78,19 +73,15 @@ public class PaddleBox : UnityEngine.MonoBehaviour
 		
 		// Return to regular material, unless game lost
 		if (GameManager.lives > 0) {
-			setAllMaterials(paddleBoxReg);
+			setMaterial(paddleBoxReg);
 		}
 	}
 
 	// Sets the material on all walls of the paddle box
-	void setAllMaterials(Material m) {
-		this.GetComponent<Renderer> ().material = m;
-		south.GetComponent<Renderer> ().material = m;
-		east.GetComponent<Renderer> ().material = m;
-		west.GetComponent<Renderer> ().material = m;
-		up.GetComponent<Renderer> ().material = m;
-		down.GetComponent<Renderer> ().material = m;
+	void setMaterial(Material m) {
+		Renderer[] renderers = GetComponentsInChildren <Renderer> ();
+		foreach (Renderer r in renderers) {
+			r.material = m;
+		}
 	}
-
-
 }
