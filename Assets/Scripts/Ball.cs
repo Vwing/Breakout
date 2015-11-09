@@ -53,6 +53,11 @@ public class Ball : UnityEngine.MonoBehaviour
             audio.Play();
         }
 
+        if (other.transform.tag == "ZombieCat")
+        {
+            Debug.Log("ball hit zombie");
+            Debug.Log(other.rigidbody.velocity);
+        }
 
         if (other.transform.tag == "Paddle" && triggered)
             StickBall();
