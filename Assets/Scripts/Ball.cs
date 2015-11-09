@@ -10,6 +10,9 @@ public class Ball : UnityEngine.MonoBehaviour
 {
     Rigidbody rb;
     public float StartForce = 600f;
+	public Material regularMaterial;
+	public Material successMaterial;
+
     bool ballInPlay = false;
     Transform paddle;
     bool triggered;
@@ -28,7 +31,8 @@ public class Ball : UnityEngine.MonoBehaviour
         bool released = Input.GetButtonUp("Fire1") || !Cardboard.SDK.Triggered;
         if (!ballInPlay && (triggered || released))
             LaunchBall();
-    }
+	
+	}
 
     void LaunchBall()
     {
@@ -51,15 +55,46 @@ public class Ball : UnityEngine.MonoBehaviour
         {
             //Play collision sound
             audio.Play();
+			reward (); // flash the ball
         }
 
+<<<<<<< HEAD
         if (other.transform.tag == "ZombieCat")
         {
             Debug.Log("ball hit zombie");
             Debug.Log(other.rigidbody.velocity);
         }
+=======
+		if (other.transform.tag == "Paddle") {
+			PaddleAnimator pa = other.gameObject.GetComponent<PaddleAnimator>();
+			pa.reward(); // Flash the paddle
+
+		}
+>>>>>>> origin/master
 
         if (other.transform.tag == "Paddle" && triggered)
             StickBall();
-    }
+    }	
+
+
+	public void reward() {
+		StartCoroutine ("FlashBallReward");
+	}
+	
+	// Flashes the ball to a "success" material (brighter color, etc.) and
+	// gradually fades back
+	IEnumerator FlashBallReward() {
+		Renderer r = GetComponent<Renderer> ();
+		
+		float startTime = Time.time;
+		float smooth = 0f;
+		
+		while (smooth < 1.0f) {
+			float t = (Time.time - startTime) / 0.333f; 
+			smooth = Mathf.SmoothStep(0f, 1.0f, t);
+			r.material.Lerp (successMaterial, regularMaterial, smooth);
+			yield return null;	
+		}
+	}
+
 }

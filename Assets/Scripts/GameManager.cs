@@ -6,7 +6,7 @@ using System.Collections;
 
 public class GameManager : UnityEngine.MonoBehaviour
 {
-    public int MaxLives = 3;
+    [Range (1,7)] public int MaxLives = 3;
     public int MaxBricks = 20;
     public int haveBricks;
     public static int lives = 1;
@@ -18,7 +18,6 @@ public class GameManager : UnityEngine.MonoBehaviour
     public GameObject Ball;
     public GameObject Explosion;
     private bool gameOver = false;
-
 
 	void Awake () 
 	{
@@ -45,7 +44,8 @@ public class GameManager : UnityEngine.MonoBehaviour
 
 	void Update ()
 	{
-        haveBricks = bricks;
+
+		haveBricks = bricks;
         if (gameOver)
         {
             if (Input.GetButtonDown("Fire1") || Cardboard.SDK.Triggered)

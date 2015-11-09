@@ -8,6 +8,7 @@ public class PaddleBox : UnityEngine.MonoBehaviour
 
 	void Start () 
 	{
+
 	}
 
 	void Update ()
@@ -24,17 +25,63 @@ public class PaddleBox : UnityEngine.MonoBehaviour
         }
     }
 
-    IEnumerator Damaged(Collider ball)
-    {
+    IEnumerator Damaged(Collider ball){
         GameManager.lives -= 1;
-        
 
-        float t = 0f;
-        while(t < 0.3f)
-        {
-            t += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
-        //mesh.material = paddleBoxReg;
-    }
+		// Play whoosh! sound
+		GetComponent<AudioSource> ().Play ();
+
+		// Flash alert material on the paddle box
+
+		float starttime = Time.time;
+		Renderer r = GetComponent<Renderer> ();
+
+		setMaterial(PaddleBoxHit);
+
+		while (Time.time < starttime + 0.1f) {
+			yield return null;
+		}
+		
+		setMaterial(paddleBoxReg);
+		starttime = Time.time;
+		
+
+		while (Time.time < starttime + 0.1f) {
+			yield return null;
+		}
+
+		setMaterial(PaddleBoxHit);
+
+		while (Time.time < starttime + 0.1f) {
+			yield return null;
+		}
+		
+		setMaterial(paddleBoxReg);
+		starttime = Time.time;
+		
+
+		while (Time.time < starttime + 0.1f) {
+			yield return null;
+		}
+		
+		setMaterial(PaddleBoxHit);
+		starttime = Time.time;
+		
+		while (Time.time < starttime + 0.2f) {
+			yield return null;
+		}
+		
+		// Return to regular material, unless game lost
+		if (GameManager.lives > 0) {
+			setMaterial(paddleBoxReg);
+		}
+	}
+
+	// Sets the material on all walls of the paddle box
+	void setMaterial(Material m) {
+		Renderer[] renderers = GetComponentsInChildren <Renderer> ();
+		foreach (Renderer r in renderers) {
+			r.material = m;
+		}
+	}
 }
