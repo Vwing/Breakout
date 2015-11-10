@@ -58,19 +58,19 @@ public class Ball : UnityEngine.MonoBehaviour
 			reward (); // flash the ball
         }
 
-<<<<<<< HEAD
+
         if (other.transform.tag == "ZombieCat")
         {
             Debug.Log("ball hit zombie");
             Debug.Log(other.rigidbody.velocity);
         }
-=======
+
 		if (other.transform.tag == "Paddle") {
 			PaddleAnimator pa = other.gameObject.GetComponent<PaddleAnimator>();
 			pa.reward(); // Flash the paddle
 
 		}
->>>>>>> origin/master
+
 
         if (other.transform.tag == "Paddle" && triggered)
             StickBall();

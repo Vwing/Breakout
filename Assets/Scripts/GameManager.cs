@@ -74,6 +74,8 @@ public class GameManager : UnityEngine.MonoBehaviour
         Destroy(Paddle);
         Destroy(Ball);
         gameOver = true;
+
+        GameObject.Find("Player").GetComponent<LevelTransition>().enabled = true; //For now, level transition when you lose!
     }
 
     void CheckIfWon()
