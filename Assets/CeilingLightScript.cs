@@ -17,9 +17,7 @@ public class CeilingLightScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (enabled) {
-			float emission = 0.1f + 0.8f * Mathf.PerlinNoise (Time.time * 0.5f, 0f); // Range between .1 - .9
-			Color emissionColor = normalEmissionColor * Mathf.LinearToGammaSpace (emission);
-			r.material.SetColor ("_EmissionColor", emissionColor);
+			// flicker();
 		}
 	}
 
@@ -29,5 +27,12 @@ public class CeilingLightScript : MonoBehaviour {
 			GetComponent<Renderer>().material.SetColor("_EmissionColor", emissionColor);
 			enabled = false;
 		}
+	}
+
+	// Brightens and dims the light intensity smoothly but unpredictably over time
+	private void flicker() {
+		float emission = 0.1f + 0.8f * Mathf.PerlinNoise (Time.time * 0.5f, 0f); // Range between .1 - .9
+		Color emissionColor = normalEmissionColor * Mathf.LinearToGammaSpace (emission);
+		r.material.SetColor ("_EmissionColor", emissionColor);
 	}
 }

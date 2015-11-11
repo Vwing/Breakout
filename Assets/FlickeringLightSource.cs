@@ -14,7 +14,7 @@ public class FlickeringLightSource : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float multiplier = 0.8f + 0.3f * Mathf.PerlinNoise (Time.time, 0f); // Range between .8 - 1.1
+		float multiplier = 0.5f + 0.5f * Mathf.PerlinNoise (Time.time, 0f); // Range between .8 - 1.1
 		l.range = normalRange * multiplier;
 	}
 }
