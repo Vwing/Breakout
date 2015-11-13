@@ -19,10 +19,7 @@ public class PaddleBox : UnityEngine.MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if(other.transform.tag == "Ball")
-        {
-            Debug.Log("Hit");
             StartCoroutine(Damaged(other));
-        }
     }
 
     IEnumerator Damaged(Collider ball){

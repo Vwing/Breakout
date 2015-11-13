@@ -9,12 +9,13 @@ using System.Collections;
 public class Ball : UnityEngine.MonoBehaviour
 {
     Rigidbody rb;
-    public float StartForce = 600f;
+    public float speed = 12f;
 	public Material regularMaterial;
 	public Material successMaterial;
 
     bool ballInPlay = false;
     Transform paddle;
+    Vector3 startPosition;
     bool triggered;
     AudioSource audio;
 
@@ -22,30 +23,39 @@ public class Ball : UnityEngine.MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         paddle = transform.parent;
+        startPosition = transform.localPosition;
         audio = GetComponent<AudioSource>(); //Get audio clip
     }
 
     void Update()
     {
-        triggered = Input.GetButton("Fire1") || Cardboard.SDK.Triggered;
-        bool released = Input.GetButtonUp("Fire1") || !Cardboard.SDK.Triggered;
-        if (!ballInPlay && (triggered || released))
+        triggered = Input.GetButtonDown("Fire1") || Cardboard.SDK.Triggered;
+        if (!ballInPlay && triggered)
             LaunchBall();
-	
+
+        else if (ballInPlay && triggered)
+            StickBall();
 	}
+
+    void FixedUpdate()
+    {
+        if (ballInPlay)
+            rb.velocity = rb.velocity.normalized * speed;
+    }
 
     void LaunchBall()
     {
-        ballInPlay = true;
         transform.parent = null;
         rb.isKinematic = false;
-        rb.AddRelativeForce(0, 0, StartForce);
+        rb.velocity = transform.forward * speed;
+        ballInPlay = true;
     }
 
     void StickBall()
     {
         ballInPlay = false;
         transform.parent = paddle;
+        transform.localPosition = startPosition;
         rb.isKinematic = true;
     }
 

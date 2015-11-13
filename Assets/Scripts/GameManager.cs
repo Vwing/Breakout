@@ -38,8 +38,10 @@ public class GameManager : UnityEngine.MonoBehaviour
 
     void Setup()
     {
-        YouWinText.SetActive(false);
-        YouLoseText.SetActive(false);
+        if(YouWinText)
+            YouWinText.SetActive(false);
+        if(YouLoseText)
+            YouLoseText.SetActive(false);
     }
 
 	void Update ()
@@ -50,7 +52,7 @@ public class GameManager : UnityEngine.MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1") || Cardboard.SDK.Triggered)
             {
-                Destroy(this);
+                Destroy(this); //This will call the OnDestroy() method below.
             }
             return;
         }
@@ -68,7 +70,8 @@ public class GameManager : UnityEngine.MonoBehaviour
         if (lives > 0)
             return;
 
-        YouLoseText.SetActive(true);
+        if(YouLoseText)
+            YouLoseText.SetActive(true);
         Instantiate(Explosion, Paddle.transform.position, Paddle.transform.rotation);
         Instantiate(Explosion, Ball.transform.position, Ball.transform.rotation);
         Destroy(Paddle);
@@ -82,7 +85,8 @@ public class GameManager : UnityEngine.MonoBehaviour
     {
         if (bricks > 0)
             return;
-        YouWinText.SetActive(true);
+        if(YouWinText)
+            YouWinText.SetActive(true);
         gameOver = true;
     }
 }

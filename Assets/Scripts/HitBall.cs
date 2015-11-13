@@ -13,6 +13,14 @@ public class HitBall : UnityEngine.MonoBehaviour
 {
     public float midAngleMagnitude = 0.5f;
     public float edgeAngleMagnitude = 0.15f;
+    private Collider col;
+    private float paddleRadius;
+
+    void Awake()
+    {
+        col = GetComponent<Collider>();
+        paddleRadius = col.bounds.extents.x;
+    }
 
     void OnCollisionEnter(Collision other)
     {
@@ -25,13 +33,11 @@ public class HitBall : UnityEngine.MonoBehaviour
             contactPoint += contact.point;
         }
         contactPoint /= other.contacts.Length;
-        contactPoint = transform.InverseTransformPoint(contactPoint); //converts to local space
-        float paddleRadius = GetComponent<Collider>().bounds.extents.x;
-        float distFromMid = Vector3.Distance(contactPoint, transform.localPosition);
-        float angleMag = distFromMid < paddleRadius * 0.8f ? midAngleMagnitude : edgeAngleMagnitude;
-
-        Vector3 ballDirection = contactPoint + Vector3.forward * angleMag; //set direction to hit the ball
-        ballDirection = Vector3.Normalize(ballDirection); //normalize it
-        other.rigidbody.velocity = transform.TransformDirection(ballDirection) * other.rigidbody.velocity.magnitude; //set ball velocity to new direction, same speed.
+        float distFromMid = Vector3.Distance(contactPoint, col.bounds.center);
+        //Debug.DrawLine(contactPoint, col.bounds.center, Color.red, 2f);
+        Vector3 ballDirection = contactPoint - col.bounds.center; //90 degrees in direction of contactPoint
+        if (distFromMid < paddleRadius * 0.95)
+            ballDirection = Vector3.RotateTowards(ballDirection, transform.forward, paddleRadius / distFromMid / 3.2f, 0f);
+        other.rigidbody.velocity = ballDirection * other.rigidbody.velocity.magnitude; //set ball velocity to new direction, same speed.
     }
 }
