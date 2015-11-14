@@ -5,16 +5,16 @@ using System.Collections.Generic;
 public class PlaySoundOnHit : UnityEngine.MonoBehaviour
 {
     public List<AudioClip> sounds;
-    private AudioSource audio;
+    private AudioSource aud;
 
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+        aud = GetComponent<AudioSource>();
     }
 
     void OnCollisionEnter(Collision other)
     {
         if (other.transform.tag == "Ball")
-            audio.PlayOneShot(sounds[Random.Range(0, sounds.Count - 1)]);
+            aud.PlayOneShot(sounds[Random.Range(0, sounds.Count - 1)]);
     }
 }

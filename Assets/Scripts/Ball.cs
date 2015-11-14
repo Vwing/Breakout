@@ -17,14 +17,14 @@ public class Ball : UnityEngine.MonoBehaviour
     Transform paddle;
     Vector3 startPosition;
     bool triggered;
-    AudioSource audio;
+    AudioSource aud;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         paddle = transform.parent;
         startPosition = transform.localPosition;
-        audio = GetComponent<AudioSource>(); //Get audio clip
+        aud = GetComponent<AudioSource>(); //Get audio clip
     }
 
     void Update()
@@ -64,7 +64,7 @@ public class Ball : UnityEngine.MonoBehaviour
         if (other.transform.tag == "Paddle" || other.transform.tag == "Wall") //On collision with paddle or wall...
         {
             //Play collision sound
-            audio.Play();
+            aud.Play();
 			reward (); // flash the ball
         }
 

@@ -4,7 +4,7 @@ using System.Collections;
 public class LevelTransition : MonoBehaviour {
 
     private Vector3 testDest;
-    private float destX, destY, destZ;
+    //private float destX, destY, destZ;
     private float compound;
     private float frames;
 
@@ -22,9 +22,9 @@ public class LevelTransition : MonoBehaviour {
         //GameObject.Find("Player").SetActive(true);
         //GameObject.Find("Player").transform.FindChild("Main Camera").gameObject.SetActive(true);
         testDest = new Vector3(22, -12, 28);
-        destX = 22;
-        destY = -12;
-        destZ = 28;
+        //destX = 22;
+        //destY = -12;
+        //destZ = 28;
         testDest = testDest - GameObject.Find("Player").transform.position;
         testDest.Normalize();
         compound = 1.03f;

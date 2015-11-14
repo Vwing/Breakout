@@ -6,12 +6,12 @@ public class Glow : UnityEngine.MonoBehaviour
     public float GlowRate = 1f;
     float MaxIntensity;
     float elapsedTime;
-    Light light;
+    Light myLight;
 
 	void Start () 
 	{
-        light = GetComponent<Light>();
-        MaxIntensity = light.intensity;
+        myLight = GetComponent<Light>();
+        MaxIntensity = myLight.intensity;
         elapsedTime = 0f;
 	}
 
@@ -21,8 +21,8 @@ public class Glow : UnityEngine.MonoBehaviour
         float fraction = elapsedTime % GlowRate / GlowRate;
         fraction *= 2;
         if(fraction < 1f)
-            light.intensity = Mathf.Lerp(0f, MaxIntensity, fraction / 2);
+            myLight.intensity = Mathf.Lerp(0f, MaxIntensity, fraction / 2);
         else
-            light.intensity = Mathf.Lerp(0f, MaxIntensity, 1 - fraction / 2);
+            myLight.intensity = Mathf.Lerp(0f, MaxIntensity, 1 - fraction / 2);
 	}
 }

@@ -31,7 +31,6 @@ public class PaddleBox : UnityEngine.MonoBehaviour
 		// Flash alert material on the paddle box
 
 		float starttime = Time.time;
-		Renderer r = GetComponent<Renderer> ();
 
 		setMaterial(PaddleBoxHit);
 

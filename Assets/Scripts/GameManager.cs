@@ -44,7 +44,6 @@ public class GameManager : UnityEngine.MonoBehaviour
 
 	void Update ()
 	{
-        haveBricks = bricks;
         if (gameOver)
         {
             if (Input.GetButtonDown("Fire1") || Cardboard.SDK.Triggered)
