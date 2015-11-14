@@ -6,6 +6,11 @@ public class TurnBallTowardsPlayer : UnityEngine.MonoBehaviour
     //How much the ball should turn (in radians) towards player position (Origin point of world)
     //when bouncing against sphere bounds
     public float turningRate = 0.1f;
+    private Transform player;
+    void Awake()
+    {
+        player = GameObject.Find("Player").transform;
+    }
 
     void OnCollisionEnter(Collision other)
     {
@@ -13,7 +18,7 @@ public class TurnBallTowardsPlayer : UnityEngine.MonoBehaviour
             return; //only do the following for Ball
 
         Vector3 ballVelocity = other.rigidbody.velocity;
-        Vector3 towardsPlayer = -ballVelocity.magnitude * other.transform.position.normalized;
+        Vector3 towardsPlayer = -ballVelocity.magnitude * (other.transform.position - player.position);
 
         ballVelocity = Vector3.RotateTowards(ballVelocity, towardsPlayer, turningRate, 0f);
 

@@ -6,16 +6,6 @@ public class PaddleBox : UnityEngine.MonoBehaviour
     public Material PaddleBoxHit;
     public Material paddleBoxReg;
 
-	void Start () 
-	{
-
-	}
-
-	void Update ()
-	{
-		
-	}
-
     void OnTriggerEnter(Collider other)
     {
         if(other.transform.tag == "Ball")
@@ -68,9 +58,8 @@ public class PaddleBox : UnityEngine.MonoBehaviour
 		}
 		
 		// Return to regular material, unless game lost
-		if (GameManager.lives > 0) {
-			setMaterial(paddleBoxReg);
-		}
+//		if (GameManager.lives > 0)
+		setMaterial(paddleBoxReg);
 	}
 
 	// Sets the material on all walls of the paddle box
