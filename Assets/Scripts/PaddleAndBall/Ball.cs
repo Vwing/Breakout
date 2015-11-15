@@ -27,14 +27,19 @@ public class Ball : UnityEngine.MonoBehaviour
         aud = GetComponent<AudioSource>(); //Get audio clip
     }
 
+    bool lastTriggerState;
     void Update()
     {
-        triggered = Input.GetButtonDown("Fire1") || Cardboard.SDK.Triggered;
+        bool t = Cardboard.SDK.Triggered;
+        triggered = Input.GetButtonDown("Fire1") || (t && !lastTriggerState);
+        lastTriggerState = t;
+        if (triggered)
+            reward();
         if (!ballInPlay && triggered)
             LaunchBall();
 
-        else if (ballInPlay && triggered)
-            StickBall();
+        //else if (ballInPlay && triggered)
+        //    StickBall();
 	}
 
     void FixedUpdate()
@@ -51,12 +56,20 @@ public class Ball : UnityEngine.MonoBehaviour
         ballInPlay = true;
     }
 
-    void StickBall()
+    public void StickBall()
     {
         ballInPlay = false;
         transform.parent = paddle;
         transform.localPosition = startPosition;
         rb.isKinematic = true;
+    }
+
+    //Had to do this on a delay b/c Cardboard checks for triggers later than frame update.
+    IEnumerator SwitchBallInPlay()
+    {
+        for (float i = 0f; i < 0.1f; i += Time.deltaTime)
+            yield return new WaitForEndOfFrame();
+        ballInPlay = !ballInPlay;
     }
 
     void OnCollisionEnter(Collision other)

@@ -6,13 +6,14 @@ using System.Collections;
 
 public class GameManager : UnityEngine.MonoBehaviour
 {
-    [Range (1,7)] public static int MaxLives = 3;
+    
+    [Range (1,7)] public int MaxLives = 3;
     public static int lives = 1;
     public static int bricks = 1;
     public static int currentLevel = 0;
     public static GameManager instance = null;
     public static bool transitioning = false;
-    private bool gameOver = false;
+    //private bool gameOver = false;
     private LevelTransition2 transitionScript;
 
 	void Awake () 

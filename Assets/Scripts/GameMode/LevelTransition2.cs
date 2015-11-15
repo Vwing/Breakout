@@ -6,6 +6,18 @@ public class LevelTransition2 : MonoBehaviour
 {
     public GameObject[] levels;
     public float timeToTransition = 10f;
+    private Rigidbody rb;
+    private int maxLives;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    void Start()
+    {
+        maxLives = GameManager.lives;
+    }
 
     public void NextLevel()
     {
@@ -15,7 +27,7 @@ public class LevelTransition2 : MonoBehaviour
 
     public void GoToLevel(int nextLevel)
     {
-        StartCoroutine(Transition(GameManager.currentLevel, nextLevel));
+        StartCoroutine(Transition(GameManager.currentLevel % levels.Length, nextLevel));
     }
 
     IEnumerator Transition(int a, int b)
@@ -27,16 +39,17 @@ public class LevelTransition2 : MonoBehaviour
         RaycastHit[] hits = Physics.RaycastAll(from, to - from, Vector3.Distance(from, to));
         SetWallsActive(hits, false);
 
-        for (float i = 0f; i <= timeToTransition; i += Time.deltaTime )
+        for (float i = 0f; i <= timeToTransition; i += Time.fixedDeltaTime )
         {
-            transform.position = Vector3.Lerp(from, to, i / timeToTransition);
-            Debug.Log(transform.position);
-            yield return new WaitForEndOfFrame();
+            rb.MovePosition(Vector3.Lerp(from, to, i / timeToTransition));
+            //transform.position = Vector3.Lerp(from, to, i / timeToTransition);
+            yield return new WaitForFixedUpdate();
         }
         SetWallsActive(hits, true);
         levels[a].SetActive(false);
 
-        GameManager.lives = GameManager.MaxLives;
+        GameObject.Find("Ball").GetComponent<Ball>().StickBall();
+        GameManager.lives = maxLives;
         ++GameManager.currentLevel;
         GameManager.transitioning = false;
     }
