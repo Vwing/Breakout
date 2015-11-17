@@ -64,6 +64,12 @@ public class Ball : UnityEngine.MonoBehaviour
         rb.isKinematic = true;
     }
 
+    public void MoveBall(float x, float y, float z)
+    {
+        Vector3 pos = new Vector3(x, y, z);
+        transform.position = pos;
+    }
+
     //Had to do this on a delay b/c Cardboard checks for triggers later than frame update.
     IEnumerator SwitchBallInPlay()
     {
