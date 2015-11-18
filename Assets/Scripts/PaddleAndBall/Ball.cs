@@ -8,6 +8,7 @@ using System.Collections;
 
 public class Ball : UnityEngine.MonoBehaviour
 {
+    public float maxDistanceFromPaddle = 200f;
     Rigidbody rb;
     public float speed = 12f;
 	public Material regularMaterial;
@@ -38,8 +39,12 @@ public class Ball : UnityEngine.MonoBehaviour
         if (!ballInPlay && triggered)
             LaunchBall();
 
-        //else if (ballInPlay && triggered)
-        //    StickBall();
+        if (Vector3.Distance(transform.position, paddle.position) > maxDistanceFromPaddle)
+        {
+            --GameManager.lives;
+            if (GameManager.lives > 0)
+                StickBall();
+        }
 	}
 
     void FixedUpdate()
