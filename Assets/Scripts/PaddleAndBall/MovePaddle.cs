@@ -7,7 +7,7 @@ using System.Collections;
 
 public class MovePaddle : UnityEngine.MonoBehaviour
 {
-    private LayerMask layerMask;
+    public LayerMask layerMask;
     private GameObject paddle;
     private Rigidbody rb;
     private Transform cameraTransform;
@@ -15,8 +15,7 @@ public class MovePaddle : UnityEngine.MonoBehaviour
 	void Start () 
 	{
         cameraTransform = Camera.main.transform;
-        layerMask = 1 << LayerMask.NameToLayer("PaddleBox");
-	}
+    }
 
     Vector3 fwd;
 	void Update ()
@@ -30,13 +29,9 @@ public class MovePaddle : UnityEngine.MonoBehaviour
             else
                 rb = paddle.GetComponent<Rigidbody>();
         }
-	}
-
-    void FixedUpdate()
-    {
         MovePaddleWithView();
     }
-
+    
     RaycastHit hit;
     void MovePaddleWithView()
     {
@@ -48,14 +43,3 @@ public class MovePaddle : UnityEngine.MonoBehaviour
         }
     }
 }
-//hits = Physics.RaycastAll(transform.position, fwd * 15, layerMask);
-//RaycastHit box = hits[0];
-
-//foreach (RaycastHit hit in hits)
-//    if (hit.transform.tag == "PaddleBoxTag")
-//    {
-//        box = hit;
-//        break;
-//    }
-//paddle.transform.position = hit.point;
-//paddle.transform.rotation = hit.transform.rotation;

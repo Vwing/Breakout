@@ -11,8 +11,8 @@ using System.Collections;
 
 public class HitBall : UnityEngine.MonoBehaviour
 {
-    public float midAngleMagnitude = 0.5f;
-    public float edgeAngleMagnitude = 0.15f;
+    //public float midAngleMagnitude = 0.5f;
+    //public float edgeAngleMagnitude = 0.15f;
     private Collider col;
     private float paddleRadius;
 
@@ -39,5 +39,13 @@ public class HitBall : UnityEngine.MonoBehaviour
         if (distFromMid < paddleRadius * 0.95)
             ballDirection = Vector3.RotateTowards(ballDirection, transform.forward, paddleRadius / distFromMid / 3.2f, 0f);
         other.rigidbody.velocity = ballDirection * other.rigidbody.velocity.magnitude; //set ball velocity to new direction, same speed.
+    }
+
+    Vector3 GetBallDirection(Vector3 ballPos, Vector3 ballVel)
+    {
+        Vector3 ballDirection = new Vector3();
+        
+
+        return ballDirection;
     }
 }

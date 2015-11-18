@@ -10,6 +10,7 @@ public class LevelTransition2 : MonoBehaviour
     private Rigidbody rb;
     private int maxLives;
     private Ball ball;
+    private GameObject paddle;
 
     void Awake()
     {
@@ -20,6 +21,7 @@ public class LevelTransition2 : MonoBehaviour
     {
         maxLives = GameManager.lives;
         ball = GameObject.Find("Ball").GetComponent<Ball>();
+        paddle = GameObject.Find("Paddle");
     }
 
     public void NextLevel()
@@ -35,6 +37,7 @@ public class LevelTransition2 : MonoBehaviour
 
     IEnumerator Transition(int a, int b)
     {
+        paddle.GetComponent<Renderer>().enabled = false;
         ball.MoveBall(1000f, 0f, 0f);
         Vector3 from = levels[a].transform.position;
         Vector3 to = levels[b].transform.position;
@@ -73,7 +76,8 @@ public class LevelTransition2 : MonoBehaviour
                 yield return new WaitForSeconds(0.5f);
         }
 
-        GameObject.Find("Ball").GetComponent<Ball>().StickBall();
+        paddle.GetComponent<Renderer>().enabled = true;
+        ball.StickBall();
         GameManager.lives = maxLives;
         ++GameManager.currentLevel;
         GameManager.transitioning = false;
@@ -88,8 +92,6 @@ public class LevelTransition2 : MonoBehaviour
                 walls.Add(hit.transform.gameObject.GetComponent<MoveWall>());
         return walls;
     }
-
-    //void MoveWall(string direction)
 
     void SetWallsActive(RaycastHit[] hits, bool active)
     {
