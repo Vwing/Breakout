@@ -18,7 +18,7 @@ public class ChooseRiftOrCardboard : UnityEngine.MonoBehaviour {
 #if UNITY_EDITOR
         RiftCamera.SetActive(true);
         CardboardCamera.SetActive(false);
-        if(UnityEngine.VR.VRSettings.enabled)
+        if (UnityEngine.VR.VRSettings.enabled)
             RiftCamera.GetComponent<SmoothedMouseLook>().enabled = false;
         else
             RiftCamera.GetComponent<SmoothedMouseLook>().enabled = true;

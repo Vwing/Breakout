@@ -1,0 +1,66 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class Fade : MonoBehaviour
+{
+    public float fadeTime = 5f;
+    Renderer[] rends;
+    public bool fading;
+
+	void Start () 
+	{
+        rends = GetComponentsInChildren<Renderer>();
+	}
+
+    public void In()
+    {
+        if(!fading)
+            StartCoroutine("FadeIn");
+    }
+
+    public void Out()
+    {
+        if(!fading)
+            StartCoroutine("FadeOut");
+    }
+
+    IEnumerator FadeIn()
+    {
+        if (rends[0].enabled || fading)
+            yield break;
+        fading = true;
+        foreach (Renderer rend in rends)
+            rend.enabled = true;
+        for (float i = 0f; i <= fadeTime; i += .1f)
+        {
+            foreach (Renderer rend in rends)
+            {
+                Color c = rend.material.color;
+                c.a = i / fadeTime;
+                rend.material.color = c;
+            }
+            yield return new WaitForSeconds(.1f);
+        }
+        fading = false;
+    }
+
+    IEnumerator FadeOut()
+    {
+        if (!rends[0].enabled || fading)
+            yield break;
+        fading = true;
+        for (float i = fadeTime; i >= 0f; i -= .1f)
+        {
+            foreach (Renderer rend in rends)
+            {
+                Color c = rend.material.color;
+                c.a = i / fadeTime;
+                rend.material.color = c;
+            }
+            yield return new WaitForSeconds(.1f);
+        }
+        foreach (Renderer rend in rends)
+            rend.enabled = false;
+        fading = false;
+    }
+}
