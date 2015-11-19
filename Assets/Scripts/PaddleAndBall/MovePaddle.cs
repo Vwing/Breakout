@@ -9,37 +9,32 @@ public class MovePaddle : UnityEngine.MonoBehaviour
 {
     public LayerMask layerMask;
     private GameObject paddle;
-    private Rigidbody rb;
     private Transform cameraTransform;
 
 	void Start () 
 	{
         cameraTransform = Camera.main.transform;
-    }
 
-    Vector3 fwd;
+		//if no paddle set, find one.
+		if (!paddle)
+		{
+			paddle = GameObject.FindGameObjectWithTag("Paddle");
+		}
+	}
+    
 	void Update ()
 	{
-        //if no paddle set, find one.
-        if (!paddle)
-        {
-            paddle = GameObject.FindGameObjectWithTag("Paddle");
-            if (!paddle)
-                return;
-            else
-                rb = paddle.GetComponent<Rigidbody>();
-        }
-        MovePaddleWithView();
-    }
+		MovePaddleWithView();
+    }    
     
-    RaycastHit hit;
     void MovePaddleWithView()
     {
-        fwd = cameraTransform.TransformDirection(Vector3.forward);
-        if(rb && Physics.Raycast(transform.position, fwd * 15, out hit, layerMask))
+		RaycastHit hit;
+		Vector3 fwd = cameraTransform.TransformDirection(Vector3.forward);
+        if(Physics.Raycast(transform.position, fwd * 15, out hit, layerMask))
         {
-            rb.MovePosition(hit.point);
-            rb.MoveRotation(hit.transform.rotation);
+            paddle.transform.position = hit.point;
+			paddle.transform.rotation = hit.transform.rotation;
         }
     }
 }
