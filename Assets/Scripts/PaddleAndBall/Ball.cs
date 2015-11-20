@@ -14,16 +14,16 @@ public class Ball : UnityEngine.MonoBehaviour
 	public Material regularMaterial;
 	public Material successMaterial;
 
-    bool ballInPlay = false;
-    Transform paddle;
-    Vector3 startPosition;
-    bool triggered;
-    AudioSource aud;
+    private bool ballInPlay = false;
+    private Transform paddleHolder;
+	private Vector3 startPosition;
+	private bool triggered;
+	private AudioSource aud;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        paddle = transform.parent;
+        paddleHolder = transform.parent;
         startPosition = transform.localPosition;
         aud = GetComponent<AudioSource>(); //Get audio clip
     }
@@ -31,7 +31,7 @@ public class Ball : UnityEngine.MonoBehaviour
     bool lastTriggerState;
     void Update()
     {
-        bool t = Cardboard.SDK.Triggered;
+		bool t = Cardboard.SDK.Triggered;
         triggered = Input.GetButtonDown("Fire1") || (t && !lastTriggerState);
         lastTriggerState = t;
         if (triggered)
@@ -39,7 +39,7 @@ public class Ball : UnityEngine.MonoBehaviour
         if (!ballInPlay && triggered)
             LaunchBall();
 
-        if (Vector3.Distance(transform.position, paddle.position) > maxDistanceFromPaddle)
+        if (Vector3.Distance(transform.position, paddleHolder.position) > maxDistanceFromPaddle)
         {
             --GameManager.lives;
             if (GameManager.lives > 0)
@@ -63,8 +63,8 @@ public class Ball : UnityEngine.MonoBehaviour
 
     public void StickBall()
     {
-        ballInPlay = false;
-        transform.parent = paddle;
+		ballInPlay = false;
+        transform.parent = paddleHolder;
         transform.localPosition = startPosition;
         rb.isKinematic = true;
     }
@@ -131,4 +131,7 @@ public class Ball : UnityEngine.MonoBehaviour
 		}
 	}
 
+	public bool isInPlay() {
+		return ballInPlay;
+	}
 }
