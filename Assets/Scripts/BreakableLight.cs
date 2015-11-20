@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CeilingLightScript : MonoBehaviour {
+public class BreakableLight : MonoBehaviour {
+
+	public Light mainLight;
+	[Range (0, 1)] public float percentLightLostOnCollision;
 
 	private bool enabled;
 	private Color normalEmissionColor;
@@ -16,13 +19,12 @@ public class CeilingLightScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (enabled) {
-			// flicker();
-		}
 	}
 
-	void onCollisionEnter(Collision other) {
-		if (other.gameObject.name.Equals ("Ball")) {
+	void OnCollisionEnter(Collision other) {
+		if (enabled && other.transform.tag == "Ball") {
+			mainLight.intensity *= (1-percentLightLostOnCollision);
+			GetComponent<AudioSource>().Play (); // Smash sound
 			Color emissionColor = Color.black * Mathf.LinearToGammaSpace (0f);
 			GetComponent<Renderer>().material.SetColor("_EmissionColor", emissionColor);
 			enabled = false;
