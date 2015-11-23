@@ -20,6 +20,10 @@ public class Ball : UnityEngine.MonoBehaviour
     bool triggered;
     AudioSource aud;
 
+    public AudioClip PowerUpRay;
+    public AudioClip test; 
+
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -130,5 +134,20 @@ public class Ball : UnityEngine.MonoBehaviour
 			yield return null;	
 		}
 	}
+
+
+    void OnTriggerEnter(Collider other)   //called when player obj first touches a trigger collider
+    {                         //other is reference to collider we have touched
+                              // Destroy(other.gameObject);   //then destroys other's game object
+        if (other.gameObject.CompareTag("TestCube"))    //if collides with "pickup" collider 
+        {
+            other.gameObject.SetActive(false);      //then sets other object to false
+                                                    //transform.localScale = new Vector3(5F, 5F, 5F); //increases XyZ axis of ball when this happens by factor of 5
+            paddle.transform.localScale = new Vector3(6F, 6F, 1F);
+            aud.PlayOneShot(PowerUpRay, 1F);
+           
+        }
+
+    }
 
 }

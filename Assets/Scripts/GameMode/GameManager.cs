@@ -38,13 +38,15 @@ public class GameManager : UnityEngine.MonoBehaviour
     void Win()
     {
         transitioning = true;
-        transitionScript.NextLevel();
+        if(transitionScript)
+            transitionScript.NextLevel();
     }
 
     void Lose()
     {
         transitioning = true;
-        transitionScript.NextLevel();
+        if (transitionScript)
+            transitionScript.NextLevel();
     }
 }
 /* Old Methods */
