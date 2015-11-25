@@ -85,6 +85,7 @@ public class LevelTransition2 : MonoBehaviour
 
         //activate level before fading out
         levels[b].SetActive(true);
+        GameManager.bricks = GameObject.FindGameObjectsWithTag("Brick").Length;
 
         //change the skybox and fade out
         RenderSettings.skybox = skies[b];

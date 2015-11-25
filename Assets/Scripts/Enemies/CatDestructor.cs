@@ -1,21 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CatDestructor : MonoBehaviour
-{
+public class CatDestructor : MonoBehaviour {
 
     public GameObject SpawnUponDestruction;
 
     // Use this for initialization
 
-    void Start()
-    {
-    }
-    /*
-    // Update is called once per frame
-    void Update () {
+	void Start () {
+	}
+	/*
+	// Update is called once per frame
+	void Update () {
 	
-    }
+	}
     */
     void OnCollisionEnter(Collision other)
     {
