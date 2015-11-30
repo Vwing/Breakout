@@ -48,8 +48,8 @@
 			float4 _MainTex_ST;
 			fixed4 _EnergyColor;
 			float2 _CollisionPoint;
-			float _CollisionTime;
-			float _Visibility;
+			fixed _CollisionTime;
+			fixed _Visibility;
 			
 			v2f vert (appdata v)
 			{
@@ -67,7 +67,7 @@
 					fixed4 col = tex2D(_MainTex, i.uv);					
 					
 					// Compute the distance between this fragment's uv coords and the collision point
-					float dist = distance(i.uv, _CollisionPoint.xy);
+					fixed dist = distance(i.uv, _CollisionPoint.xy);
 					
 					// Animation effect has four components. (1) there's an expanding blast radius that
 					// reveals an expanding ring-shaped section of the sampled texture (with energy color multiplied).
@@ -77,31 +77,31 @@
 					// that'd otherwise be transparent will have some visibility for a while.
 					
 					
-					float elapsedTime = _Time[1] - _CollisionTime;					
-					float blastRadius = lerp(0.3, 1.0, elapsedTime * 2);
-					float secondBlastRadius = lerp(1.0, 0, elapsedTime * 4);
+					fixed elapsedTime = _Time[1] - _CollisionTime;					
+					fixed blastRadius = lerp(0.3, 1.0, elapsedTime * 2);
+					fixed secondBlastRadius = lerp(1.0, 0, elapsedTime * 4);
 					
 					// The amount of alpha boost we give over the entire surface varies with time.
 					// Visibility property is user-defined minimum alpha at any time, so we'll take the greater of.
-					float addAlpha;
+					fixed addAlpha;
 					addAlpha = max(_Visibility, 0.1 * (1 - smoothstep(0, 0.5, elapsedTime)));			
 
 					// Ring-shaped section: 0.05 texture units wide: use the texture (and add alpha to fill in holes slightly)														
 					if (dist < blastRadius && dist > blastRadius - 0.05) 
-						col = (_EnergyColor.r, _EnergyColor.g, _EnergyColor.b, _EnergyColor.a * col.a * 1 + addAlpha);
+						col = fixed4(_EnergyColor.r, _EnergyColor.g, _EnergyColor.b, _EnergyColor.a * col.a * 1 + addAlpha);
 					
 					// Secondary ring: 0.02 texture units wide: don't use the texture (just Energy color @ 0.25 alpha)
 					else if (dist < secondBlastRadius && dist > secondBlastRadius - 0.02)
-						col = (_EnergyColor.r, _EnergyColor.g, _EnergyColor.b, addAlpha * 2.5);
+						col = fixed4(_EnergyColor.r, _EnergyColor.g, _EnergyColor.b, addAlpha * 2.5);
 					
 					// Bright border around the edges of the force field
 					// (Multiple of addAlpha to use animated fade)
 					else if (i.uv.x < 0.01 || i.uv.x > 0.99 || i.uv.y < 0.01 || i.uv.y > 0.99)
-						col = (_EnergyColor.r, _EnergyColor.g, _EnergyColor.b, addAlpha * 2);
+						col = fixed4(_EnergyColor.r, _EnergyColor.g, _EnergyColor.b, addAlpha * 2);
 					
 					// If this pixel isn't part of a ring, just add some alpha for visibility:
 					else 
-						col = (_EnergyColor.r, _EnergyColor.g, _EnergyColor.b, _EnergyColor.a * addAlpha);	
+						col = fixed4(_EnergyColor.r, _EnergyColor.g, _EnergyColor.b, _EnergyColor.a * addAlpha);	
 				
 				// apply fog
 				UNITY_APPLY_FOG(i.fogCoord, col);				
