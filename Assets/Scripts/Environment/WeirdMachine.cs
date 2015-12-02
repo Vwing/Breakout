@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NuclearPool : MonoBehaviour {
+public class WeirdMachine : MonoBehaviour {
 
 	public Light nuclearLight;
+	public ParticleSystem particle;
 	private bool meltedDown;
 
 	void Start() {
@@ -15,11 +16,12 @@ public class NuclearPool : MonoBehaviour {
 			// Reduce lives to zero
 			GameManager.lives = 0;
 
-			// Stop the ball
-			other.attachedRigidbody.velocity = new Vector3(0,0,0);
+			// Kill the ball
+			Destroy (other.gameObject);
 
 			// Start meltdown
 			meltedDown = true;
+			particle.Stop();
 			StartCoroutine("meltdown");
 		}
 	}
