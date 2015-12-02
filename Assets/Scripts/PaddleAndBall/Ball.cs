@@ -20,6 +20,9 @@ public class Ball : UnityEngine.MonoBehaviour
 	private bool triggered;
 	private AudioSource aud;
 
+    private Vector3 originalPaddleScale;
+    private GameObject paddle;
+
     public AudioClip PowerUpRay;
     public AudioClip test; 
 
@@ -29,6 +32,9 @@ public class Ball : UnityEngine.MonoBehaviour
         rb = GetComponent<Rigidbody>();
         paddleHolder = transform.parent;
         startPosition = transform.localPosition;
+        paddle = GameObject.FindGameObjectWithTag("Paddle");
+        originalPaddleScale = paddle.transform.localScale;
+
         aud = GetComponent<AudioSource>(); //Get audio clip
     }
 
@@ -87,6 +93,7 @@ public class Ball : UnityEngine.MonoBehaviour
         ballInPlay = !ballInPlay;
     }
 
+   
     void OnCollisionEnter(Collision other)
     {
         if (other.transform.tag == "Paddle" || other.transform.tag == "Wall") //On collision with paddle or wall...
@@ -145,7 +152,7 @@ public class Ball : UnityEngine.MonoBehaviour
                                                     //transform.localScale = new Vector3(5F, 5F, 5F); //increases XyZ axis of ball when this happens by factor of 5
 
             aud.PlayOneShot(PowerUpRay, 1F);
-            paddle.transform.localScale = new Vector3(6F, 6F, 1F);     //increase size of paddle
+            paddle.transform.localScale = originalPaddleScale * 1.25f;     //increase size of paddle
 
             /*
 
@@ -170,7 +177,7 @@ public class Ball : UnityEngine.MonoBehaviour
     void resizeIt()
     {
 
-        paddle.transform.localScale = new Vector3(3F, 3F, 1F);     //transforms paddle back to original size
+        paddle.transform.localScale = originalPaddleScale;     //transforms paddle back to original size
 
 
 
