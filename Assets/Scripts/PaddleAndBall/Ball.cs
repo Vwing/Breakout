@@ -41,7 +41,9 @@ public class Ball : UnityEngine.MonoBehaviour
     bool lastTriggerState;
     void Update()
     {
-		bool t = Cardboard.SDK.Triggered;
+        bool t = false;
+        if(Cardboard.SDK)
+            t = Cardboard.SDK.Triggered;
         triggered = Input.GetButtonDown("Fire1") || (t && !lastTriggerState);
         lastTriggerState = t;
         if (triggered)

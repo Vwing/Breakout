@@ -37,10 +37,10 @@ public class Cardboard : UnityEngine.MonoBehaviour {
         sdk = UnityEngine.Object.FindObjectOfType<Cardboard>();
       }
       if (sdk == null) {
-        Debug.Log("Creating Cardboard object");
-        var go = new GameObject("Cardboard");
-        sdk = go.AddComponent<Cardboard>();
-        go.transform.localPosition = Vector3.zero;
+        //Debug.Log("Creating Cardboard object");
+        //var go = new GameObject("Cardboard");
+        //sdk = go.AddComponent<Cardboard>();
+        //go.transform.localPosition = Vector3.zero;
       }
       return sdk;
     }
