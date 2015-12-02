@@ -31,7 +31,8 @@ public class ReverseNormals : UnityEngine.MonoBehaviour
                 mesh.SetTriangles(triangles, m);
             }
         }
-
-        this.GetComponent<MeshCollider>().sharedMesh = filter.mesh;
+        MeshCollider meshCol = GetComponent<MeshCollider>();
+        if(meshCol)
+            this.GetComponent<MeshCollider>().sharedMesh = filter.mesh;
     }
 }

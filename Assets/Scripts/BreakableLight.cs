@@ -6,13 +6,13 @@ public class BreakableLight : MonoBehaviour {
 	public Light mainLight;
 	[Range (0, 1)] public float percentLightLostOnCollision;
 
-	private bool enabled;
+	private bool active;
 	private Color normalEmissionColor;
 	private Renderer r;
 
 	// Use this for initialization
 	void Start () {
-		enabled = true;
+		active = true;
 		r = GetComponent<Renderer> ();
 		normalEmissionColor = r.material.GetColor ("_EmissionColor"); // Fetch the normal emission color from the selected material
 	}
@@ -22,12 +22,12 @@ public class BreakableLight : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision other) {
-		if (enabled && other.transform.tag == "Ball") {
+		if (active && other.transform.tag == "Ball") {
 			mainLight.intensity *= (1-percentLightLostOnCollision);
 			GetComponent<AudioSource>().Play (); // Smash sound
 			Color emissionColor = Color.black * Mathf.LinearToGammaSpace (0f);
 			GetComponent<Renderer>().material.SetColor("_EmissionColor", emissionColor);
-			enabled = false;
+			active = false;
 		}
 	}
 

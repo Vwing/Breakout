@@ -141,12 +141,12 @@ public class Ball : UnityEngine.MonoBehaviour
 			yield return null;	
 		}
 	}
-    float speedBoostTime = 6; 
+ //   float speedBoostTime = 6; 
 
     void OnTriggerEnter(Collider other)   //called when player obj first touches a trigger collider
     {                         //other is reference to collider we have touched
                               // Destroy(other.gameObject);   //then destroys other's game object
-        if (other.gameObject.CompareTag("TestCube"))    //if collides with "pickup" collider 
+        if (other.tag == "TestCube")    //if collides with "pickup" collider 
         {
             other.gameObject.SetActive(false);      //then sets other object to false
                                                     //transform.localScale = new Vector3(5F, 5F, 5F); //increases XyZ axis of ball when this happens by factor of 5

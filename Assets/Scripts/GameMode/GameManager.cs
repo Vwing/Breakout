@@ -20,7 +20,11 @@ public class GameManager : UnityEngine.MonoBehaviour
 	{
         lives = MaxLives;
         bricks = GameObject.FindGameObjectsWithTag("Brick").Length;
-        transitionScript = GameObject.Find("PlayerPaddleBoxAmalgum").GetComponent<LevelTransition2>();
+	    GameObject paddlebox = GameObject.Find("PlayerPaddleBoxAmalgum");
+        if(paddlebox)
+            transitionScript = paddlebox.GetComponent<LevelTransition2>();
+        else
+            Debug.Log("Cannot transition due to missing paddleboxAmalgum. See GameManager.cs line 23");
         if (instance == null)
             instance = this;
         else if (instance != null)

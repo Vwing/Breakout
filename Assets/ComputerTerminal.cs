@@ -4,11 +4,11 @@ using System.Collections;
 public class ComputerTerminal : MonoBehaviour {
 
 	public GameObject[] controlledObjects;
-	private bool enabled;
+	private bool active;
 
 	// Use this for initialization
 	void Start () {
-		enabled = true;
+		active = true;
 	}
 	
 	// Update is called once per frame
@@ -20,8 +20,8 @@ public class ComputerTerminal : MonoBehaviour {
 	// and set every GameObject in controlledObjects[] inactive
 	// (useful for shutting off force fields, enemies, etc.)
 	void OnCollisionEnter(Collision collision) {
-		if (enabled && collision.collider.transform.tag == "Ball") {
-			enabled = false;
+		if (active && collision.collider.transform.tag == "Ball") {
+			active = false;
 			// Shut the computer screens off
 			GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0,0,0,0) );
 			// Play the power off noise
