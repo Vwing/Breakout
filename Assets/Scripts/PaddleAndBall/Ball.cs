@@ -134,7 +134,7 @@ public class Ball : UnityEngine.MonoBehaviour
 			yield return null;	
 		}
 	}
-
+    float speedBoostTime = 6; 
 
     void OnTriggerEnter(Collider other)   //called when player obj first touches a trigger collider
     {                         //other is reference to collider we have touched
@@ -143,10 +143,36 @@ public class Ball : UnityEngine.MonoBehaviour
         {
             other.gameObject.SetActive(false);      //then sets other object to false
                                                     //transform.localScale = new Vector3(5F, 5F, 5F); //increases XyZ axis of ball when this happens by factor of 5
-            paddle.transform.localScale = new Vector3(6F, 6F, 1F);
+
             aud.PlayOneShot(PowerUpRay, 1F);
-           
+            paddle.transform.localScale = new Vector3(6F, 6F, 1F);     //increase size of paddle
+
+            /*
+
+                        while (speedBoostTime > 0)
+                            {
+                                speedBoostTime -= Time.deltaTime;
+                                if (speedBoostTime <= 0) speed /= 2;
+
+                            paddle.transform.localScale = new Vector3(2F, 2F, 1F);
+                        }
+
+
+                */
+
+            Invoke("resizeIt", 10);      //runs resizeIt function after 4 seconds
+
+
         }
+
+    }
+
+    void resizeIt()
+    {
+
+        paddle.transform.localScale = new Vector3(3F, 3F, 1F);     //transforms paddle back to original size
+
+
 
     }
 
