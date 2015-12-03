@@ -63,7 +63,11 @@ public class LevelTransition2 : MonoBehaviour
         //move the walls up
         List<MoveWall> walls = GetWalls(from, to);
         foreach (MoveWall wall in walls)
+        {
+            if(wall == null)
+                Debug.Log("Null");
             wall.Up(4f);
+        }
         yield return new WaitForSeconds(4f);
 
         //move player to next location
@@ -121,7 +125,11 @@ public class LevelTransition2 : MonoBehaviour
         RaycastHit[] hits = Physics.RaycastAll(from, to - from, Vector3.Distance(from, to));
         foreach (RaycastHit hit in hits)
             if (hit.transform.tag == "Wall")
-                walls.Add(hit.transform.gameObject.GetComponent<MoveWall>());
+            {
+                MoveWall toAdd = hit.transform.gameObject.GetComponent<MoveWall>();
+                if(toAdd)
+                    walls.Add(toAdd);
+            }
         return walls;
     }
 
