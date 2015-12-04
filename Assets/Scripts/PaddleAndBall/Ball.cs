@@ -24,8 +24,9 @@ public class Ball : UnityEngine.MonoBehaviour
     private GameObject paddle;
 
     public AudioClip PowerUpRay;
-    public AudioClip test; 
+    public AudioClip test;
 
+    bool usingCardboard = false;
 
     void Awake()
     {
@@ -36,13 +37,14 @@ public class Ball : UnityEngine.MonoBehaviour
         originalPaddleScale = paddle.transform.localScale;
 
         aud = GetComponent<AudioSource>(); //Get audio clip
+        usingCardboard = Cardboard.SDK;
     }
 
     bool lastTriggerState;
     void Update()
     {
         bool t = false;
-        if(Cardboard.SDK)
+        if (usingCardboard)
             t = Cardboard.SDK.Triggered;
         triggered = Input.GetButtonDown("Fire1") || (t && !lastTriggerState);
         lastTriggerState = t;
@@ -51,12 +53,12 @@ public class Ball : UnityEngine.MonoBehaviour
         if (!ballInPlay && triggered)
             LaunchBall();
 
-        if (Vector3.Distance(transform.position, paddleHolder.position) > maxDistanceFromPaddle)
-        {
-            --GameManager.lives;
-            if (GameManager.lives > 0)
-                StickBall();
-        }
+        //if (Vector3.Distance(transform.position, paddleHolder.position) > maxDistanceFromPaddle)
+        //{
+        //    --GameManager.lives;
+        //    if (GameManager.lives > 0)
+        //        StickBall();
+        //}
 	}
 
     void FixedUpdate()
@@ -83,8 +85,7 @@ public class Ball : UnityEngine.MonoBehaviour
 
     public void MoveBall(float x, float y, float z)
     {
-        Vector3 pos = new Vector3(x, y, z);
-        transform.position = pos;
+        transform.position = new Vector3(x, y, z);
     }
 
     //Had to do this on a delay b/c Cardboard checks for triggers later than frame update.
