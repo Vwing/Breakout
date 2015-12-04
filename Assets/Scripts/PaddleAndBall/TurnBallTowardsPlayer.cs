@@ -14,7 +14,7 @@ public class TurnBallTowardsPlayer : UnityEngine.MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.name != "Ball")
+        if (other.gameObject.tag != "Ball")
             return; //only do the following for Ball
 
         Vector3 ballVelocity = other.rigidbody.velocity;

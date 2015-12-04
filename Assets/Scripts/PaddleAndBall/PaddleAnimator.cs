@@ -23,7 +23,7 @@ public class PaddleAnimator : MonoBehaviour {
 		float startTime = Time.time;
 		float smooth = 0f;
 
-		while (smooth < 1.0f) {
+		while (smooth <= 1.0f) {
 			float t = (Time.time - startTime) / 0.333f; 
 			smooth = Mathf.SmoothStep(0f, 1.0f, t);
 			r.material.Lerp (successMaterial, regularMaterial, smooth);

@@ -11,7 +11,7 @@ public class NuclearPool : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if (!meltedDown && other.tag == "Ball") {
+		if (!meltedDown && other.tag == "Ball" && !other.GetComponent<HelperBall>()) {
 			// Reduce lives to zero
 			GameManager.lives = 0;
 
@@ -19,6 +19,7 @@ public class NuclearPool : MonoBehaviour {
 			other.attachedRigidbody.velocity = new Vector3(0,0,0);
 
 			// Start meltdown
+			meltedDown = true;
 			StartCoroutine("meltdown");
 		}
 	}

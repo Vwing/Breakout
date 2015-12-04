@@ -8,11 +8,12 @@ public class PaddleBox : UnityEngine.MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {        
-		if (other.transform.tag == "Ball") {
-			// Check if the ball is stuck to the paddle -- if so, no damage.
-			Ball b = other.gameObject.GetComponent<Ball>();
-			if (b && b.isInPlay()) 
-				StartCoroutine (Damaged (other));
+		// Only cause damage if 1) it's a ball; 2) that's in play; and 3) it's not a 'helper' ball
+		bool damaged = (other.transform.tag == "Ball" && other.GetComponent<Ball> ().isInPlay () 
+			&& !other.GetComponent<HelperBall> ());
+
+		if (damaged) {
+			StartCoroutine (Damaged (other));
 		}
     }
 
