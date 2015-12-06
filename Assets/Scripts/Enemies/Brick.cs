@@ -7,7 +7,7 @@ public class Brick : UnityEngine.MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.transform.tag != "Ball" && other.transform.tag != "Weapon")
+        if (other.transform.tag != "Ball" && other.transform.tag != "Shrapnel" && other.transform.tag != "Weapon")
             return;
         GameManager.bricks--;
         GameObject.Instantiate(SpawnUponDestruction, transform.position, transform.rotation);
