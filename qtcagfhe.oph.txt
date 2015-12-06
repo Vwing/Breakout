@@ -1,0 +1,31 @@
+﻿Merge remote-tracking branch 'origin/master'
+
+# Conflicts:
+#	Assets/Scenes/Shawn dupe for testing.unity.meta
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 1 and 1 different commit each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	new file:   Assets/Art/Textures/powerups/multiple-ball-powerup.png
+#	renamed:    Assets/Materials/RadialGradient.jpg.meta -> Assets/Art/Textures/powerups/multiple-ball-powerup.png.meta
+#	deleted:    Assets/Materials/BallMultiplier-Bright.mat
+#	deleted:    Assets/Materials/BallMultiplier-Bright.mat.meta
+#	modified:   Assets/Materials/BallMultiplier.mat
+#	deleted:    Assets/Materials/RadialGradient.jpg
+#	modified:   Assets/Prefabs/Ball Multiplier.prefab
+#	modified:   Assets/Scripts/Powerups/BallMultiplier.cs
+#
+
