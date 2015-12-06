@@ -4,12 +4,10 @@ using System.Collections;
 public class BallMultiplier : MonoBehaviour {
 
 	public Transform helperBallPrefab;
-	public Material regularMaterial;
-	public Material successMaterial;
 	public int newBallsPerHit;
 
 	void Update() {
-		transform.Rotate (new Vector3 (0f, Time.deltaTime * 20f, 0f), Space.World);
+		transform.Rotate (new Vector3 (0f, Time.deltaTime * 60f, 0f), Space.World);
 	}
 
 	void OnCollisionEnter(Collision c) {
@@ -55,7 +53,6 @@ public class BallMultiplier : MonoBehaviour {
 		while (smooth <= 1.0f) {
 			float t = (Time.time - startTime) / 0.333f; 
 			smooth = Mathf.SmoothStep(0f, 1.0f, t);
-			r.material.Lerp (successMaterial, regularMaterial, smooth);
 			transform.localScale = Vector3.Lerp (bigSize, origSize, smooth);
 			yield return null;	
 		}
