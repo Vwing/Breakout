@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WeirdMachine : MonoBehaviour {
+public class WeirdMachine_EnergyBeam : MonoBehaviour {
 
 	public Light nuclearLight;
 	public ParticleSystem particle;
@@ -11,6 +11,7 @@ public class WeirdMachine : MonoBehaviour {
 		meltedDown = false;
 	}
 
+	// Meltdown happens if the ball collides with the energy beam collider
 	void OnTriggerEnter(Collider other) {
 		if (!meltedDown && other.tag == "Ball" && !other.GetComponent<HelperBall>()) {
 			// Reduce lives to zero
