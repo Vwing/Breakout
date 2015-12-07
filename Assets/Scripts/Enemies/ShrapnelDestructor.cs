@@ -9,7 +9,7 @@ public class ShrapnelDestructor : MonoBehaviour {
 
     void Start()
     {
-        timeToLive = 0.2f;
+        timeToLive = 0.3f;
         counter = 0.0f;
     }
 
@@ -17,6 +17,15 @@ public class ShrapnelDestructor : MonoBehaviour {
     void Update () {
         counter += Time.deltaTime;
         if (counter > timeToLive)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.transform.tag == "Brick")
         {
             Destroy(gameObject);
         }

@@ -3,7 +3,13 @@ using System.Collections;
 
 public class BrickCatTypeB : Brick
 {
- 
+
+    void Start()
+    {
+        transform.GetChild(0).gameObject.SetActive(false);
+    }
+
+
     void OnCollisionEnter(Collision other)
     {
         if (other.transform.tag != "Ball" && other.transform.tag != "Shrapnel")
@@ -12,6 +18,7 @@ public class BrickCatTypeB : Brick
 
         GameObject child = transform.GetChild(0).gameObject; //Save the cat...for now
 
+        child.SetActive(true);
         child.AddComponent<Rigidbody>(); //Add the rigidbody component to the cat within
         child.GetComponent<Rigidbody>().useGravity = true; //Allow the cat to use gravity so it will fall to its death
         transform.DetachChildren(); //Detach the cat from its prison (i.e. the brick)

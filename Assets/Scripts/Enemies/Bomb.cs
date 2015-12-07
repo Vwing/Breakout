@@ -23,11 +23,12 @@ public class Bomb : MonoBehaviour {
 
         GameObject.Instantiate(SpawnUponDestruction, transform.position, transform.rotation);
         GameObject temp;
-        for (int i = 0; i < 150; ++i)
+        for (int i = 0; i < 64; ++i)
         {
-            temp = GameObject.Instantiate(Shrap, transform.position, Random.rotation) as GameObject;
+            temp = GameObject.Instantiate(Shrap, transform.position + Random.insideUnitSphere * 0.5f, Random.rotationUniform) as GameObject;
             //temp.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * 10);
-            temp.GetComponent<Rigidbody>().velocity = Random.onUnitSphere * Random.Range(50.0F, 100.0F);
+            temp.GetComponent<Rigidbody>().velocity = Random.onUnitSphere * Random.Range(10f, 20f);
+            temp.GetComponent<MeshRenderer>().enabled = false;
         }
         Destroy(gameObject);
     }

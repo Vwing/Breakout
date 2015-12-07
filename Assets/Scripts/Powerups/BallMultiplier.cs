@@ -11,11 +11,12 @@ public class BallMultiplier : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision c) {
+
+        Debug.Log("Collision with BallMultiplier");
 		// If we collide with a Ball, and it's not a helper ball, generate some helpers
 		if (c.collider.transform.tag == "Ball" && c.collider.GetComponent<HelperBall>() == null) {
-
 			// Show 'reward' for hit
-			StartCoroutine("FlashReward");
+            StartCoroutine("FlashReward");
 
 			Vector3 pos = c.transform.position;
 			Ball ball = c.collider.GetComponent<Ball>();
@@ -39,6 +40,9 @@ public class BallMultiplier : MonoBehaviour {
 
 				// Launch the ball
 				h.LaunchBall();
+
+                //Destroy this powerup
+                Destroy(gameObject);
 			}
 		}
 	}
