@@ -3,10 +3,10 @@ using System.Collections;
 
 public class BrickCatTypeB : Brick
 {
-
-    void Start()
+    public float rotationSpeed = 5f;
+    void Update()
     {
-        transform.GetChild(0).gameObject.SetActive(false);
+        transform.Rotate(0, Time.deltaTime * rotationSpeed, 0, Space.Self);
     }
 
 
@@ -18,7 +18,7 @@ public class BrickCatTypeB : Brick
 
         GameObject child = transform.GetChild(0).gameObject; //Save the cat...for now
 
-        child.SetActive(true);
+        //child.SetActive(true);
         child.AddComponent<Rigidbody>(); //Add the rigidbody component to the cat within
         child.GetComponent<Rigidbody>().useGravity = true; //Allow the cat to use gravity so it will fall to its death
         transform.DetachChildren(); //Detach the cat from its prison (i.e. the brick)
@@ -49,6 +49,7 @@ public class BrickCatTypeB : Brick
 
         child.GetComponent<Rigidbody>().mass = 10000f;
         child.GetComponent<Rigidbody>().velocity = vecFinal; //Set velocity vector of freed cat
+        child.GetComponent<CatDestructor>().launched = true;
 
         GameObject.Instantiate(SpawnUponDestruction, transform.position, transform.rotation); //Explosion effect at position of the brick
 
