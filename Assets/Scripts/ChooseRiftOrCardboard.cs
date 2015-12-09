@@ -35,4 +35,10 @@ public class ChooseRiftOrCardboard : UnityEngine.MonoBehaviour {
         CardboardCamera.SetActive(true);
 #endif
     }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+            Application.LoadLevel(0);
+    }
 }
