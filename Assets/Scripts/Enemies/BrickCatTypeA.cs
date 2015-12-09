@@ -3,10 +3,10 @@ using System.Collections;
 
 public class BrickCatTypeA : Brick
 {
-
-    void Start()
+    public float rotationSpeed = 5f;
+    void Update()
     {
-        transform.GetChild(0).gameObject.SetActive(false);
+        transform.Rotate(0, Time.deltaTime * rotationSpeed, 0, Space.Self);
     }
 
     void OnCollisionEnter(Collision other)
@@ -17,10 +17,11 @@ public class BrickCatTypeA : Brick
 
         GameObject child = transform.GetChild(0).gameObject; //Save the cat...for now
 
-        child.SetActive(true);
         child.AddComponent<Rigidbody>(); //Add the rigidbody component to the cat within
         child.GetComponent<Rigidbody>().useGravity = true; //Allow the cat to use gravity so it will fall to its death
         transform.DetachChildren(); //Detach the cat from it's prison (i.e. the brick)
+        child.GetComponent<CatDestructor>().launched = true;
+
         GameObject.Instantiate(SpawnUponDestruction, transform.position, transform.rotation); //Explosion effect at position of the brick
 
         //Implement delayed cat death later...

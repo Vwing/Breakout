@@ -48,7 +48,7 @@ public class BallMultiplier : MonoBehaviour {
 	}
 
 	IEnumerator FlashReward() {
-		Renderer r = GetComponent<Renderer> ();		
+		//Renderer r = GetComponent<Renderer> ();		
 		Vector3 origSize = transform.localScale;
 		Vector3 bigSize = transform.localScale + new Vector3(0.1f, 0.1f, 0.1f);
 		float startTime = Time.time;
