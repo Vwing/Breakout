@@ -3,11 +3,13 @@ using System.Collections;
 
 public class BrickCatTypeB : Brick
 {
+
     public float rotationSpeed = 5f;
     void Update()
     {
         transform.Rotate(0, Time.deltaTime * rotationSpeed, 0, Space.Self);
     }
+
 
     void OnCollisionEnter(Collision other)
     {
