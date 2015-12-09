@@ -16,7 +16,7 @@ public class BrickCatTypeB : Brick
         Debug.Log("outofbounds");
         Debug.Log(name);
         Debug.Log(other.transform.name);
-        if (other.transform.tag != "Ball" && other.transform.tag != "Shrapnel")
+        if (other.transform.tag != "Ball" && other.transform.tag != "Shrapnel" && other.transform.tag != "WardOffEnemies")
             return;
         //Afaik, we do not need to decrement the number of bricks here since these are special "enemy" bricks.
 

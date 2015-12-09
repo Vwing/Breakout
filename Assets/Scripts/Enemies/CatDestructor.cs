@@ -22,6 +22,7 @@ public class CatDestructor : MonoBehaviour
     {
         if (!launched)
             return;
+        transform.GetChild(0).GetComponent<ChooseRandSprite>().TurnTowardsPlayer();
         counter += Time.deltaTime;
         if (counter > timeToLive)
         {

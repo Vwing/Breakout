@@ -7,7 +7,7 @@ public class Fade : MonoBehaviour
     Renderer[] rends;
     public bool fading;
 
-	void Start () 
+	void Awake () 
 	{
         rends = GetComponentsInChildren<Renderer>();
 	}

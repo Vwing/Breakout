@@ -3,15 +3,10 @@ using System.Collections;
 
 public class BrickCatTypeA : Brick
 {
-    public float rotationSpeed = 5f;
-    void Update()
-    {
-        transform.Rotate(0, Time.deltaTime * rotationSpeed, 0, Space.Self);
-    }
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.transform.tag != "Ball" && other.transform.tag != "Shrapnel")
+        if (other.transform.tag != "Ball" && other.transform.tag != "Shrapnel" && other.transform.tag != "WardOffEnemies")
             return;
         //Afaik, we do not need to decrement the number of bricks here since these are special "enemy" bricks.
 
