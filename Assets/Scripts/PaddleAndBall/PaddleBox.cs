@@ -9,7 +9,8 @@ public class PaddleBox : UnityEngine.MonoBehaviour
     void OnTriggerEnter(Collider other)
     {        
 		// Only cause damage if 1) it's a ball; 2) that's in play; and 3) it's not a 'helper' ball
-		bool damaged = (other.transform.tag == "Ball" && other.GetComponent<Ball> ().isInPlay () 
+        Ball ball = other.GetComponent<Ball>();
+		bool damaged = (other.transform.tag == "Ball" && ball && ball.isInPlay () 
 			&& !other.GetComponent<HelperBall> ());
 
 		if (damaged) {
