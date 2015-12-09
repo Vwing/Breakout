@@ -34,11 +34,8 @@ public class HelperBall : UnityEngine.MonoBehaviour
   
     void OnCollisionEnter(Collision other)
     {
-        if (other.transform.tag == "Paddle") {
-			Destroy (this.gameObject);
-		}
 
-		else if (other.transform.tag == "Wall") //On collision with paddle or wall...
+		if (other.transform.tag == "Wall" || other.transform.tag == "Paddle") //On collision with paddle or wall...
         {
 			reward (); // flash the ball
         }
@@ -48,8 +45,15 @@ public class HelperBall : UnityEngine.MonoBehaviour
             Debug.Log("ball hit zombie");
             Debug.Log(other.rigidbody.velocity);
         }
-    }	
+    }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag == "PaddleBox")
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
 	public void reward() 
 	{
