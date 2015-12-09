@@ -24,7 +24,7 @@ public class HitBall : UnityEngine.MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag != "Ball")
+        if (other.gameObject.tag != "Ball"  && other.gameObject.tag != "Laser")
             return;
         //Find average contact point
         Vector3 contactPoint = Vector3.zero;

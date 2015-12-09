@@ -11,14 +11,14 @@ public class Ball : UnityEngine.MonoBehaviour
     public float maxDistanceFromPaddle = 200f;
     Rigidbody rb;
     public float speed = 12f;
-	public Material regularMaterial;
-	public Material successMaterial;
+    public Material regularMaterial;
+    public Material successMaterial;
 
     private bool ballInPlay = false;
     private Transform paddleHolder;
-	private Vector3 startPosition;
-	private bool triggered;
-	private AudioSource aud;
+    private Vector3 startPosition;
+    private bool triggered;
+    private AudioSource aud;
 
     private Vector3 originalPaddleScale;
     private GameObject paddle;
@@ -26,7 +26,17 @@ public class Ball : UnityEngine.MonoBehaviour
     public AudioClip PowerUpRay;
     public AudioClip test;
 
+    public AudioClip gunshot;
+   
+
     bool usingCardboard = false;
+
+    public ShootDemo _ShootDemo;
+    public int GunPowerup = 0;
+    public float timer;
+
+    public int counter = 0;
+
 
     void Awake()
     {
@@ -58,8 +68,17 @@ public class Ball : UnityEngine.MonoBehaviour
         //    --GameManager.lives;
         //    if (GameManager.lives > 0)
         //        StickBall();
-        //}
-	}
+        //
+
+
+
+
+
+
+
+
+
+    }
 
     void FixedUpdate()
     {
@@ -77,7 +96,7 @@ public class Ball : UnityEngine.MonoBehaviour
 
     public void StickBall()
     {
-		ballInPlay = false;
+        ballInPlay = false;
         transform.parent = paddleHolder;
         transform.localPosition = startPosition;
         rb.isKinematic = true;
@@ -96,14 +115,14 @@ public class Ball : UnityEngine.MonoBehaviour
         ballInPlay = !ballInPlay;
     }
 
-   
+
     void OnCollisionEnter(Collision other)
     {
         if (other.transform.tag == "Paddle" || other.transform.tag == "Wall") //On collision with paddle or wall...
         {
             //Play collision sound
             aud.Play();
-			reward (); // flash the ball
+            reward(); // flash the ball
         }
 
 
@@ -113,38 +132,42 @@ public class Ball : UnityEngine.MonoBehaviour
             Debug.Log(other.rigidbody.velocity);
         }
 
-		if (other.transform.tag == "Paddle") {
-			PaddleAnimator pa = other.gameObject.GetComponent<PaddleAnimator>();
-			pa.reward(); // Flash the paddle
+        if (other.transform.tag == "Paddle")
+        {
+            PaddleAnimator pa = other.gameObject.GetComponent<PaddleAnimator>();
+            pa.reward(); // Flash the paddle
 
-		}
+        }
 
 
         if (other.transform.tag == "Paddle" && triggered)
             StickBall();
-    }	
+    }
 
 
-	public void reward() {
-		StartCoroutine ("FlashBallReward");
-	}
-	
-	// Flashes the ball to a "success" material (brighter color, etc.) and
-	// gradually fades back
-	IEnumerator FlashBallReward() {
-		Renderer r = GetComponent<Renderer> ();
-		
-		float startTime = Time.time;
-		float smooth = 0f;
-		
-		while (smooth < 1.0f) {
-			float t = (Time.time - startTime) / 0.333f; 
-			smooth = Mathf.SmoothStep(0f, 1.0f, t);
-			r.material.Lerp (successMaterial, regularMaterial, smooth);
-			yield return null;	
-		}
-	}
- //   float speedBoostTime = 6; 
+    public void reward()
+    {
+        StartCoroutine("FlashBallReward");
+    }
+
+    // Flashes the ball to a "success" material (brighter color, etc.) and
+    // gradually fades back
+    IEnumerator FlashBallReward()
+    {
+        Renderer r = GetComponent<Renderer>();
+
+        float startTime = Time.time;
+        float smooth = 0f;
+
+        while (smooth < 1.0f)
+        {
+            float t = (Time.time - startTime) / 0.333f;
+            smooth = Mathf.SmoothStep(0f, 1.0f, t);
+            r.material.Lerp(successMaterial, regularMaterial, smooth);
+            yield return null;
+        }
+    }
+    //   float speedBoostTime = 6; 
 
     void OnTriggerEnter(Collider other)   //called when player obj first touches a trigger collider
     {                         //other is reference to collider we have touched
@@ -155,8 +178,13 @@ public class Ball : UnityEngine.MonoBehaviour
                                                     //transform.localScale = new Vector3(5F, 5F, 5F); //increases XyZ axis of ball when this happens by factor of 5
 
             aud.PlayOneShot(PowerUpRay, 1F);
-            paddle.transform.localScale = originalPaddleScale * 1.25f;     //increase size of paddle
+            paddle.transform.localScale = originalPaddleScale * 2f;     //increase size of paddle
 
+
+
+
+
+            //runs resizeIt function after 4 seconds
             /*
 
                         while (speedBoostTime > 0)
@@ -170,23 +198,32 @@ public class Ball : UnityEngine.MonoBehaviour
 
                 */
 
-            Invoke("resizeIt", 10);      //runs resizeIt function after 4 seconds
 
+            Invoke("resizeIt", 4);
 
         }
 
+        if (other.tag == "GunPowerup")
+        {
+            GunPowerup = 1;
+            aud.PlayOneShot(gunshot, 1F);
+            other.gameObject.SetActive(false);
+
+        }
     }
 
     void resizeIt()
     {
-
+        paddle.transform.localScale = new Vector3(0.5F, 0.5F, 1F);
         paddle.transform.localScale = originalPaddleScale;     //transforms paddle back to original size
-
+                                                               // paddle.transform.localScale = originalPaddleScale * 4f;
 
 
     }
 
-	public bool isInPlay() {
-		return ballInPlay;
-	}
+    public bool isInPlay()
+    {
+        return ballInPlay;
+    }
+
 }
