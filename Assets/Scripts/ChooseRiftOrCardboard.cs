@@ -39,6 +39,6 @@ public class ChooseRiftOrCardboard : UnityEngine.MonoBehaviour {
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
-            Application.LoadLevel(0);
+            Application.LoadLevel("Menu");
     }
 }
