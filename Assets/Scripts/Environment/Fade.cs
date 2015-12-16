@@ -26,8 +26,18 @@ public class Fade : MonoBehaviour
 
     IEnumerator FadeIn()
     {
-        if (rends[0].enabled || fading)
+        if (fading)
             yield break;
+        if(rends[0].enabled)
+        {
+            foreach (Renderer rend in rends)
+            {
+                Color c = rend.material.color;
+                c.a = 0;
+                rend.material.color = c;
+                rend.enabled = false;
+            }
+        }
         fading = true;
         foreach (Renderer rend in rends)
             rend.enabled = true;

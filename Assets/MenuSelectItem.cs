@@ -22,8 +22,11 @@ public class MenuSelectItem : MonoBehaviour
             if (usingCardboard)
                 t = Cardboard.SDK.Triggered;
 	        myChild.SetActive(true);
-            if(Input.GetMouseButtonDown(0) || t)
-                Application.LoadLevel(name);
+            if (Input.GetMouseButtonDown(0) || t)
+            {
+                GameManager.currentLevel = int.Parse("" + name[name.Length - 1]) - 1;
+                Application.LoadLevel(0);
+            }
 	    }
 	    else
 	    {

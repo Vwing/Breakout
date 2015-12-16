@@ -8,7 +8,6 @@ using System.Collections;
 
 public class HitBall : UnityEngine.MonoBehaviour
 {
-    public GameObject arrow;
     private Collider col;
     private float paddleRadius;
 
@@ -35,11 +34,10 @@ public class HitBall : UnityEngine.MonoBehaviour
         if (distFromMid < paddleRadius * 0.95)
             ballDirection = Vector3.RotateTowards(ballDirection, transform.forward, paddleRadius / distFromMid / 3.2f, 0f);
         other.rigidbody.velocity = ballDirection * other.rigidbody.velocity.magnitude; //set ball velocity to new direction, same speed.
-        //arrow.transform.rotation = Quaternion.Euler(-90,0,0) * Quaternion.Inverse(Quaternion.LookRotation(other.transform.TransformDirection(ballDirection.normalized)));
-        //arrow.transform.position = other.transform.TransformDirection(contactPoint);
-        Debug.Log(ballDirection);
-        arrow.transform.rotation = Quaternion.Euler(90, 0, 0) * Quaternion.LookRotation(arrow.transform.position + ballDirection);// *Quaternion.LookRotation(transform.forward, ballDirection.normalized); //Quaternion.Euler(-90, 0, 0) * Quaternion.Inverse(Quaternion.LookRotation(other.transform.TransformDirection(ballDirection.normalized)));
-        arrow.transform.localPosition = transform.InverseTransformPoint(contactPoint);
+
+        //Debug.Log(ballDirection);
+        //arrow.transform.rotation = Quaternion.Euler(90, 0, 0) * Quaternion.LookRotation(arrow.transform.position + ballDirection);// *Quaternion.LookRotation(transform.forward, ballDirection.normalized); //Quaternion.Euler(-90, 0, 0) * Quaternion.Inverse(Quaternion.LookRotation(other.transform.TransformDirection(ballDirection.normalized)));
+        //arrow.transform.localPosition = transform.InverseTransformPoint(contactPoint);
     }
 
     public Vector3 GetBallDirection(Vector3 ballPos, Vector3 ballVel)

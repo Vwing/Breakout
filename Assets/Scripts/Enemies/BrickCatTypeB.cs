@@ -77,8 +77,7 @@ public class BrickCatTypeB : Brick
 
         GameObject.Instantiate(SpawnUponDestruction, transform.position, transform.rotation); //Explosion effect at position of the brick
 
-        if (tag == "Brick")
-            GameManager.bricks--;
+        GameManager.bricks--;
         Destroy(gameObject); //Destroy brick (but not cat...yet)
     }
 }

@@ -18,7 +18,7 @@ public class WeirdMachine_EnergyBeam : MonoBehaviour {
 			GameManager.lives = 0;
 
 			// Kill the ball
-			Destroy (other.gameObject);
+			//Destroy (other.gameObject);
 
 			// Start meltdown
 			meltedDown = true;
