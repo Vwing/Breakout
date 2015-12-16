@@ -3,19 +3,8 @@ using System.Collections;
 
 public class BrickCatTypeB : Brick
 {
-
-    public float rotationSpeed = 5f;
-    void Update()
-    {
-        transform.Rotate(0, Time.deltaTime * rotationSpeed, 0, Space.Self);
-    }
-
-
     void OnCollisionEnter(Collision other)
     {
-        Debug.Log("outofbounds");
-        Debug.Log(name);
-        Debug.Log(other.transform.name);
         if (other.transform.tag != "Ball" && other.transform.tag != "Shrapnel" && other.transform.tag != "WardOffEnemies")
             return;
         //Afaik, we do not need to decrement the number of bricks here since these are special "enemy" bricks.
@@ -47,16 +36,11 @@ public class BrickCatTypeB : Brick
             float minLaunchAngle = Mathf.Atan(by/bx); //get minimum launch angle to possibly hit paddle
             theta = Random.Range(minLaunchAngle, Mathf.PI/2); //pick arbitrary angle between min launch angle and 90 degree angle, inclusive
 
-            Debug.Log("minLaunchAngle");
-            Debug.Log(minLaunchAngle);
         }
         else //if cat is above or level with paddle
         {
             theta = Random.Range(0f, Mathf.PI / 2); //pick arbitrary angle between 0 degree angle and 90 degree angle, inclusive
         }
-        
-        Debug.Log("theta");
-        Debug.Log(theta);
         
         vi = Mathf.Sqrt((9.8f * Mathf.Pow(bx, 2)) / (2 * bx * Mathf.Sin(theta) * Mathf.Cos(theta) - 2 * by * Mathf.Pow(Mathf.Cos(theta), 2)));
         vx = vi * Mathf.Cos(theta);
@@ -93,6 +77,8 @@ public class BrickCatTypeB : Brick
 
         GameObject.Instantiate(SpawnUponDestruction, transform.position, transform.rotation); //Explosion effect at position of the brick
 
+        if (tag == "Brick")
+            GameManager.bricks--;
         Destroy(gameObject); //Destroy brick (but not cat...yet)
     }
 }

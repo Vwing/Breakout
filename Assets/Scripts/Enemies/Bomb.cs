@@ -30,6 +30,8 @@ public class Bomb : MonoBehaviour {
             temp.GetComponent<Rigidbody>().velocity = Random.onUnitSphere * Random.Range(10f, 20f);
             temp.GetComponent<MeshRenderer>().enabled = false;
         }
+        if (tag == "Brick")
+            GameManager.bricks--;
         Destroy(gameObject);
     }
 }

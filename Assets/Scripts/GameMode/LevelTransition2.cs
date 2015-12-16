@@ -102,6 +102,7 @@ public class LevelTransition2 : MonoBehaviour
         paddle.GetComponent<Renderer>().enabled = true;
         ball.StickBall();
         GameManager.lives = maxLives;
+        GameManager.bricks = GameObject.FindGameObjectsWithTag("Brick").Length;
         ++GameManager.currentLevel;
         GameManager.transitioning = false;
     }

@@ -9,6 +9,7 @@ public class GameManager : UnityEngine.MonoBehaviour
     
     [Range (1,7)] public int MaxLives = 3;
     public static int lives = 1;
+    public int brickCount = 0;
     public static int bricks = 1;
     public static int currentLevel = 0;
     public static GameManager instance = null;
@@ -33,6 +34,7 @@ public class GameManager : UnityEngine.MonoBehaviour
 	}
     void Update()
     {
+        brickCount = bricks;
         if (!transitioning && lives <= 0)
             Lose();
         else if (!transitioning && bricks <= 0)
@@ -53,57 +55,3 @@ public class GameManager : UnityEngine.MonoBehaviour
             transitionScript.NextLevel();
     }
 }
-/* Old Methods */
-//    public GameObject YouWinText;
-//    public GameObject YouLoseText;
-//    public GameObject Paddle;
-//    public GameObject Ball;
-//    public GameObject Explosion;
-//void Setup()
-//{
-//    if(YouWinText)
-//        YouWinText.SetActive(false);
-//    if(YouLoseText)
-//        YouLoseText.SetActive(false);
-//}
-
-//void Update ()
-//{
-//if (gameOver)
-//{
-//    if (Input.GetButtonDown("Fire1") || Cardboard.SDK.Triggered)
-//    {
-//        Destroy(this); //This will call the OnDestroy() method below.
-//    }
-//    return;
-//}
-//    CheckIfGameover();
-//    CheckIfWon();
-//}
-
-//void OnDestroy()
-//{
-//    Application.LoadLevel(Application.loadedLevel);
-//}
-
-//void CheckIfGameover()
-//{
-//    if (lives > 0)
-//        return;
-//if(YouLoseText)
-//    YouLoseText.SetActive(true);
-//Instantiate(Explosion, Paddle.transform.position, Paddle.transform.rotation);
-//Instantiate(Explosion, Ball.transform.position, Ball.transform.rotation);
-//Destroy(Paddle);
-//Destroy(Ball);
-//    gameOver = true;
-//}
-
-//void CheckIfWon()
-//{
-//    if (bricks > 0)
-//        return;
-//    if(YouWinText)
-//        YouWinText.SetActive(true);
-//    gameOver = true;
-//}

@@ -8,7 +8,6 @@ using System.Collections;
 
 public class Ball : UnityEngine.MonoBehaviour
 {
-    public float maxDistanceFromPaddle = 200f;
     Rigidbody rb;
     public float speed = 12f;
     public Material regularMaterial;
@@ -27,6 +26,8 @@ public class Ball : UnityEngine.MonoBehaviour
     public AudioClip test;
 
     public AudioClip gunshot;
+    [HideInInspector]
+    public Quaternion arrowRot;
    
 
     bool usingCardboard = false;
@@ -62,22 +63,7 @@ public class Ball : UnityEngine.MonoBehaviour
             reward();
         if (!ballInPlay && triggered)
             LaunchBall();
-
-        //if (Vector3.Distance(transform.position, paddleHolder.position) > maxDistanceFromPaddle)
-        //{
-        //    --GameManager.lives;
-        //    if (GameManager.lives > 0)
-        //        StickBall();
-        //
-
-
-
-
-
-
-
-
-
+        //Physics.Raycast(transform.position,transform.forward);
     }
 
     void FixedUpdate()
@@ -125,23 +111,11 @@ public class Ball : UnityEngine.MonoBehaviour
             reward(); // flash the ball
         }
 
-
-        if (other.transform.tag == "ZombieCat")
-        {
-            Debug.Log("ball hit zombie");
-            Debug.Log(other.rigidbody.velocity);
-        }
-
         if (other.transform.tag == "Paddle")
         {
             PaddleAnimator pa = other.gameObject.GetComponent<PaddleAnimator>();
             pa.reward(); // Flash the paddle
-
         }
-
-
-        if (other.transform.tag == "Paddle" && triggered)
-            StickBall();
     }
 
 
@@ -180,10 +154,6 @@ public class Ball : UnityEngine.MonoBehaviour
             aud.PlayOneShot(PowerUpRay, 1F);
             paddle.transform.localScale = originalPaddleScale * 2f;     //increase size of paddle
 
-
-
-
-
             //runs resizeIt function after 4 seconds
             /*
 
@@ -197,10 +167,7 @@ public class Ball : UnityEngine.MonoBehaviour
 
 
                 */
-
-
             Invoke("resizeIt", 4);
-
         }
 
         if (other.tag == "GunPowerup")
@@ -217,8 +184,6 @@ public class Ball : UnityEngine.MonoBehaviour
         paddle.transform.localScale = new Vector3(0.5F, 0.5F, 1F);
         paddle.transform.localScale = originalPaddleScale;     //transforms paddle back to original size
                                                                // paddle.transform.localScale = originalPaddleScale * 4f;
-
-
     }
 
     public bool isInPlay()

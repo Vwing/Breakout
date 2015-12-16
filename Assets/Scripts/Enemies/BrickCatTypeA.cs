@@ -20,7 +20,8 @@ public class BrickCatTypeA : Brick
         GameObject.Instantiate(SpawnUponDestruction, transform.position, transform.rotation); //Explosion effect at position of the brick
 
         //Implement delayed cat death later...
-        
+        if (tag == "Brick")
+            GameManager.bricks--;
         Destroy(gameObject); //Destroy brick (but not cat...yet)
     }
 }

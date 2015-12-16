@@ -6,8 +6,10 @@ public class HelperBall : UnityEngine.MonoBehaviour
     public float maxDistanceFromPaddle = 200f;
     private Rigidbody rb;
     public float speed = 12f;
+    public float TimeTilDestructible = 10f;
 	public Material regularMaterial;
 	public Material successMaterial;
+    float timer = 0f;
 
 	private Vector3 startPosition;
 
@@ -16,13 +18,10 @@ public class HelperBall : UnityEngine.MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
-    {
-	}
-
     void FixedUpdate()
     {
 	    rb.velocity = rb.velocity.normalized * speed;
+        timer += Time.fixedDeltaTime;
     }
 
     public void LaunchBall()
@@ -49,7 +48,7 @@ public class HelperBall : UnityEngine.MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "PaddleBox")
+        if (other.transform.tag == "PaddleBox" && timer > TimeTilDestructible)
         {
             Destroy(this.gameObject);
         }
