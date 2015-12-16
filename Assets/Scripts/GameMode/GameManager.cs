@@ -61,7 +61,6 @@ public class GameManager : UnityEngine.MonoBehaviour
     {
         settingUp = false;
         lives = MaxLives;
-        bricks = GameObject.FindGameObjectsWithTag("Brick").Length;
         GameObject paddlebox = GameObject.Find("PlayerPaddleBoxAmalgum");
         if (paddlebox)
         {
@@ -70,12 +69,10 @@ public class GameManager : UnityEngine.MonoBehaviour
             foreach (GameObject g in transitionScript.levels)
                 g.SetActive(false);
             transitionScript.levels[currentLevel].SetActive(true);
-            Renderer[] walls = transitionScript.purgatory.transform.GetChild(currentLevel).GetComponentsInChildren<Renderer>();
-            foreach (Renderer r in walls)
-                r.enabled = false;
             RenderSettings.skybox = transitionScript.skies[currentLevel];
         }
         else
             Debug.Log("Cannot transition due to missing paddleboxAmalgum. See GameManager.cs line 23");
+        bricks = GameObject.FindGameObjectsWithTag("Brick").Length;
     }
 }

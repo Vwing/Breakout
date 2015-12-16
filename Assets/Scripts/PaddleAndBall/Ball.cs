@@ -52,18 +52,28 @@ public class Ball : UnityEngine.MonoBehaviour
     }
 
     bool lastTriggerState;
+    float exitTimer = 0;
     void Update()
     {
         bool t = false;
         if (usingCardboard)
             t = Cardboard.SDK.Triggered;
+
+        //Load menu if holding down trigger for 3 seconds
+        if (t && lastTriggerState)
+            exitTimer += Time.deltaTime;
+        else
+            exitTimer = 0;
+        if (exitTimer > 3f)
+            Application.LoadLevel("Menu");
+
         triggered = Input.GetButtonDown("Fire1") || (t && !lastTriggerState);
+
         lastTriggerState = t;
         if (triggered)
             reward();
         if (!ballInPlay && triggered)
             LaunchBall();
-        //Physics.Raycast(transform.position,transform.forward);
     }
 
     void FixedUpdate()

@@ -25,7 +25,7 @@ public class MenuSelectItem : MonoBehaviour
             if (Input.GetMouseButtonDown(0) || t)
             {
                 GameManager.currentLevel = int.Parse("" + name[name.Length - 1]) - 1;
-                Application.LoadLevel(0);
+                Application.LoadLevel("Main");
             }
 	    }
 	    else
